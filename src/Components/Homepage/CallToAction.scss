@@ -1,0 +1,19 @@
+.calltoaction-container{
+	background-color: #FBBC05;
+	padding: 1rem;
+	border-radius: 30px;
+	cursor: pointer;
+
+	#calltoaction-title{
+		font-size: 11pt;
+	}
+
+	.calltoaction-number{
+		font-weight: bold;
+
+		span{
+			margin-left: .5rem;
+			font-size: 12pt;
+		}
+	}
+}

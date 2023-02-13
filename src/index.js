@@ -1,5 +1,10 @@
-const sum = (a, b) => {
-	return a + b;
-}
+import ReactDOM from "react-dom/client";
+import React from "react";
 
-export default sum;
+import App from "./App";
+import "./index.scss";
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+		<App />
+)

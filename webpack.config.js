@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const path = require('path');
 
 module.exports = {
 	module: {
@@ -38,5 +39,12 @@ module.exports = {
 	optimization: {
 		minimize: true,
 		minimizer: [new TerserWebpackPlugin()]
+	},
+	devServer: {
+		hot: true,
+		historyApiFallback: true,
+		headers: {
+			'Cache-Control': 'no-cache'
+		}
 	}
 }
