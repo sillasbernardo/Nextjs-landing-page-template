@@ -3,7 +3,7 @@ import { faHome, faComments, faPeopleGroup, faLightbulb, faHandshake } from "@fo
 
 import './Navbar.scss';
 import NavbarItem from "./Navbar_Item";
-import CallToAction from "./CallToAction";
+import CallToAction from "../CallToAction";
 
 const Navbar = () => {
 	return (

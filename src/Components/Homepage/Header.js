@@ -5,8 +5,8 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import './Header.scss';
 import logo from '../../Assets/Img/logo.gif';
 import { MobileViewContext } from '../Context/MobileViewContext';
-import Navbar from './Navbar';
-import MobileNavbar from './MobileNavbar';
+import Navbar from './Navbar/Navbar';
+import MobileNavbar from './Navbar/MobileNavbar';
 
 const Header = () => {
   /*

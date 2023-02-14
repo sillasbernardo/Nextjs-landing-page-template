@@ -12,7 +12,7 @@ const App = () => {
 	const width =  useWindowSize();
 
 	useEffect(() => {
-		if (width < 700){
+		if (width < 800){
 			setIsMobile(true)
 		} else {
 			setIsMobile(false)

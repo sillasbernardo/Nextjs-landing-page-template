@@ -1,0 +1,10 @@
+.presentation-image-slide{
+	display: flex;
+	flex-direction: row;
+	position: relative;
+
+	.presentation-image{
+		width: 100vw;
+		max-width: 1900px;
+	}
+}

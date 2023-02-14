@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
+/* import { CSSTransition } from 'react-transition-group'; */
 
 import Backdrop from './Backdrop';
 import './Modal.scss';
 
 const Modal = (props) => {
-	const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
-	useEffect(() => {
-		if (props.onOpenNavbar){
-			setIsShow(true)
-		}
-	}, [props.onOpenNavbar])
+  useEffect(() => {
+    if (props.onOpenNavbar) {
+      setIsShow(true);
+    }
+  }, [props.onOpenNavbar]);
 
-/* 
+  /* 
 	TODO:
 	- CSS Transition is not working properly. 
 		Backdrop appears first and then modal.
@@ -26,16 +26,8 @@ const Modal = (props) => {
 
   const content = (
     <React.Fragment>
+      {props.children}
       {props.onOpenNavbar && <Backdrop onCloseNavbar={props.onCloseNavbar} />}
-      <CSSTransition
-        in={isShow}
-        mountOnEnter
-        unmountOnExit
-        timeout={500}
-        classNames="modal-transition"
-      >
-        <div className="modal">{props.children}</div>
-      </CSSTransition>
     </React.Fragment>
   );
 

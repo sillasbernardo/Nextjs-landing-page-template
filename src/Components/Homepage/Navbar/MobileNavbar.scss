@@ -1,0 +1,29 @@
+.mobile-navbar{
+	position: fixed;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	background-color: #000E28;
+	z-index: 100;
+	display: flex;
+	padding: 1.88rem 0;
+	width: 100%;
+}
+
+.modal-transition-enter {
+	transform: translateY(-100%);
+}
+
+.modal-transition-enter-active {
+	transform: translateY(0);
+	transition: transform 500ms ease-in-out;
+}
+
+.modal-transition-exit {
+	transform: translateY(0);
+}
+
+.modal-transition-exit-active {
+	transform: translateY(-100%);
+	transition: transform 500ms ease-in-out;
+}
