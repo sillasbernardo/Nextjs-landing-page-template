@@ -4,7 +4,7 @@ import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 
 import './CallToAction.scss';
 
-const CallToAction = () => {
+const CallToAction = (props) => {
 	return (
 		<div className="calltoaction-container">
 			<span id="calltoaction-title">Fale conosco</span>

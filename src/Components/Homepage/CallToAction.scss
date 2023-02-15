@@ -2,6 +2,7 @@
 	background-color: #FBBC05;
 	padding: 1rem;
 	width: 150px;
+	height: 45px;
 	border-radius: 30px;
 	cursor: pointer;
 
@@ -15,6 +16,20 @@
 		span{
 			margin-left: .5rem;
 			font-size: 12pt;
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.calltoaction-container{
+		max-width: 150px;
+		margin-right: 5%;
+		padding: 1rem .4rem;
+
+		.calltoaction-number{
+			span{
+				font-size: 10pt;
+			}
 		}
 	}
 }

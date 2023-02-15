@@ -13,6 +13,25 @@
 	}
 }
 
+#header-container-mobile{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #000E28;
+	height: 120px;
+	padding: 0 2rem;
+	position: fixed;
+	z-index: 11;
+	min-width: 350px;
+	width: 90%;
+
+
+	#header-bars-icon{
+		color: white;
+		font-size: 20pt;
+	}
+}
+
 @media screen and (max-width: 800px) {
 	#header-container{
 		display: flex;

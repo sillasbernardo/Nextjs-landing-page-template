@@ -1,55 +1,59 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import './ImageSlide.scss';
-
-const IMAGES = [];
-const loadImages = async () => {
-  for (let i = 1; i <= 10; i++) {
-    const img = await import(
-      `../../../Assets/Img/ImageSlide/imageslide_${i}.jpeg`
-    );
-    IMAGES.push(img.default);
-  }
-
-  return IMAGES;
-};
+import ButtonSlider from './ButtonSlider';
+import { loadImages, handlerSlideBtn } from "./SliderHandler";
 
 const ImageSlide = () => {
-  const [images, setImages] = useState();
-  const [slidePosX, setSlidePosX] = useState();
-	const slideRef = useRef(null);
-	const imageRef = useRef(null);
+  const [images, setImages] = useState([]); // Store images to be slided
+  const [slideIndex, setSlideIndex] = useState(1); // Store the actual index of image in row
 
+  /* 
+    * Fetch images from loadImages()
+   */
   useEffect(() => {
-    loadImages().then((result) => setImages(result));
+    loadImages().then((result) => {
+      const imagesArray = result.map((image) => ({ id: uuidv4(), image }));
+      setImages(imagesArray);
+    });
   }, []);
 
-/*   useEffect(() => {
+  /* 
+    * Upload slider every "timer" miliseconds
+  */
+  const timer = 7000;
+  useEffect(() => {
+    if (slideIndex > images.length){
+      setSlideIndex(1);
+    }
+
     const intervalId = setInterval(() => {
-      setCurrentImageIndex((currentImageIndex + 1) % images.length);  
-    }, 5000);
+      setSlideIndex(slideIndex + 1);
+    }, timer)
 
     return () => clearInterval(intervalId);
-  }, [currentImageIndex, images]); */
-
-	useEffect(() => {
-		const intervalId = setInterval(() => {
-			const { offsetLeft } = slideRef.current;
-			const { width } = imageRef.current;
-			setSlidePosX(offsetLeft - width);
-			console.log(slidePosX)
-		}, 5000)
-
-		return () => clearInterval(intervalId);
-	})
+  })
 
   return (
-    <ul ref={slideRef} style={{position: "relative", left: slidePosX}} className="presentation-image-slide">
+    <div className="container-slider">
       {images &&
         images.map((image, index) => {
-          return <img className='presentation-image' ref={imageRef} key={index} src={image} alt="img" />;
+          return (
+            <div
+              key={image.id}
+              className={
+                slideIndex === index + 1 ? 'slide active-anim' : 'slide'
+              }
+            >
+              <div id='gray-foreground'></div>
+              <img src={image.image} alt="img" />
+            </div>
+          );
         })}
-    </ul>
+        <ButtonSlider moveSlide={() => handlerSlideBtn("next", slideIndex, setSlideIndex, images)} direction={"next"} />
+        <ButtonSlider moveSlide={() => handlerSlideBtn("prev", slideIndex, setSlideIndex, images)} direction={"prev"} />
+    </div>
   );
 };
 

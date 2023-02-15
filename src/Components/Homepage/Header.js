@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <div id="header-container">
+    <div id={isMobile ? "header-container-mobile" : "header-container"}>
       <img src={logo} alt="logo" width="100" />
       {isMobile ? (
         <FontAwesomeIcon
