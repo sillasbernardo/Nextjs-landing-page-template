@@ -4,7 +4,7 @@ import { useEffect } from "react";
  * loadImages() loads all images in ImageSlide folder asynchronously
  */
 const IMAGES = [];
-export const loadImages = async () => {
+export const loadSliderImages = async () => {
   // For prod: 10 instead of 6
   for (let i = 1; i <= 6; i++) {
     const img = await import(

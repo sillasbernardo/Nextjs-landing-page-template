@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import './Header.scss';
-import logo from '../../Assets/Img/logo.gif';
-import { MobileViewContext } from '../Context/MobileViewContext';
-import Navbar from './Navbar/Navbar';
-import MobileNavbar from './Navbar/MobileNavbar';
+import logo from '../../../Assets/Img/logo.gif';
+import { MobileViewContext } from '../../Context/MobileViewContext';
+import Navbar from '../Navbar/Navbar';
+import MobileNavbar from '../Navbar/MobileNavbar';
 
 const Header = () => {
   /*
@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <div id={isMobile ? "header-container-mobile" : "header-container"}>
+    <div id={"header-container"}>
       <img src={logo} alt="logo" width="100" />
       {isMobile ? (
         <FontAwesomeIcon

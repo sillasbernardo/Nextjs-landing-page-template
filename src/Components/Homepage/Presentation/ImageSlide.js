@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import './ImageSlide.scss';
 import ButtonSlider from './ButtonSlider';
-import { loadImages, handlerSlideBtn } from "./SliderHandler";
+import { loadSliderImages, handlerSlideBtn } from "./SliderHandler";
 
 const ImageSlide = () => {
   const [images, setImages] = useState([]); // Store images to be slided
@@ -13,7 +13,7 @@ const ImageSlide = () => {
     * Fetch images from loadImages()
    */
   useEffect(() => {
-    loadImages().then((result) => {
+    loadSliderImages().then((result) => {
       const imagesArray = result.map((image) => ({ id: uuidv4(), image }));
       setImages(imagesArray);
     });

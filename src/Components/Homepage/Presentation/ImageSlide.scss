@@ -66,3 +66,9 @@
   right: 20px;
   transform: translateY(-60%);
 }
+
+@media screen and (max-width: 800px) {
+  .prev, .next{
+    top: 40%;
+  }
+}

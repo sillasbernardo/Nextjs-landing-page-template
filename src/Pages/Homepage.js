@@ -1,9 +1,11 @@
 import React from "react";
 
-import Header from "../Components/Homepage/Header";
+import Header from "../Components/Homepage/Header/Header";
 import Presentation from "../Components/Homepage/Presentation/Presentation";
-import Awards from "../Components/Homepage/Presentation/Awards/Awards";
+import Awards from "../Components/Homepage/Awards/Awards";
 import './Homepage.scss';
+import Reviews from "../Components/Homepage/Reviews/Reviews";
+import About from "../Components/Homepage/About/About";
 
 const Homepage = () => {
 	return (
@@ -11,6 +13,8 @@ const Homepage = () => {
 			<Header />
 			<Presentation />
 			<Awards />
+			<Reviews />
+			<About />
 		</div>
 	)
 }
