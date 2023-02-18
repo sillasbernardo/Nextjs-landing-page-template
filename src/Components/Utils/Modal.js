@@ -14,16 +14,6 @@ const Modal = (props) => {
     }
   }, [props.onOpenNavbar]);
 
-  /* 
-	TODO:
-	- CSS Transition is not working properly. 
-		Backdrop appears first and then modal.
-		Also I couldn't add transform, the animation
-		always show up as opacity.
-
-		Objective: Finish navbar mobile
-*/
-
   const content = (
     <React.Fragment>
       {props.children}

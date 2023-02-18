@@ -12,8 +12,6 @@ import { MobileViewContext } from "../Components/Context/MobileViewContext";
 const Homepage = () => {
 	const isMobile = useContext(MobileViewContext);
 
-	console.log(isMobile)
-
 	return (
 		<div id="homepage-container">
 			<Header />

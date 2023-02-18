@@ -2,12 +2,14 @@
 	display: flex;
 	background: linear-gradient(to bottom, #E2E2E2, #e2e2e2cc);
 	position: relative;
-	top: 498px;
+	top: 532px;
 	justify-content: space-evenly;
+	align-items: center;
 
-	.about-image{
-		width: 500px;
-		height: 600px;
+	.about-top{
+		.about-image{
+			width: 300px;
+		}
 	}
 
 	.about-description{
@@ -18,7 +20,7 @@
 
 		.about-desc-title{
 			font-size: 28pt;
-			margin-bottom: 30px;
+			margin: 30px 0;
 
 			.about-desc-title-bold{
 				font-weight: bold;
@@ -28,6 +30,54 @@
 		p{
 			width: 500px;
 			text-align: justify;
+		}
+	}
+}
+
+@media screen and (max-width: 1050px) and (min-width: 800px){
+	.about-container{
+		.about-top{
+			.about-image{
+				width: 50%;
+				height: 60%;
+			}
+		}
+
+		.about-description{
+			p{
+				width: 80%;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 800px){
+	.about-container{
+		top: 0;
+		flex-direction: column;
+		justify-content: center;
+		padding: 20px 0;
+		width: 100vw;
+		
+		.about-top{
+			.about-image{
+				width: 150px;
+			}
+
+			.x-close{
+				position: absolute;
+				top: 30px;
+				left: 90vw;
+				font-size: 24pt;
+				cursor: pointer;
+			}
+		}
+
+
+		.about-description{
+			p{
+				width: 350px;
+			}
 		}
 	}
 }

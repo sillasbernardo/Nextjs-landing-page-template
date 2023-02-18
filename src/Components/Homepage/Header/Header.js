@@ -5,47 +5,58 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import './Header.scss';
 import logo from '../../../Assets/Img/logo.gif';
 import { MobileViewContext } from '../../Context/MobileViewContext';
+import { ClosePageContext } from '../../Context/ClosePageContext';
 import Navbar from '../Navbar/Navbar';
 import MobileNavbar from '../Navbar/MobileNavbar';
 
 const Header = () => {
   /*
-   * If isMobile receives "true", mobile view is rendered.
-   * Otherwise, desktop view is rendered.
+   * This context makes all mobile rendering in Header when set to true
    */
   const isMobile = useContext(MobileViewContext);
 
   /*
-   * If IsMobileNavbar is true, navbar options show up.
-   * Mobile view only
+    * This state is used to render the mobile navbar since the desktop navbar component
+    * is different from the mobile's
    */
   const [isMobileNavbar, setIsMobileNavbar] = useState(false);
 
   const mobileNavbarHandler = (trigger) => {
-    trigger ? setIsMobileNavbar(true) : setIsMobileNavbar(false);
+    trigger ? setIsMobileNavbar(true) : (
+      document.body.style.overflow = 'auto',
+      setIsMobileNavbar(false)
+    );
   };
 
+  /* 
+    * the onCloseBtn useState is used by ClosePageContext to broadcast to all Header's children
+    * it will be true when a close button is clicked in any page.
+  */
+ const [onCloseBtn, setOnCloseBtn] = useState(false);
+
   return (
-    <div id={"header-container"}>
-      <img src={logo} alt="logo" width="100" />
-      {isMobile ? (
-        <FontAwesomeIcon
-          onClick={() => mobileNavbarHandler(true)}
-          id="header-bars-icon"
-          icon={solid('bars')}
-        />
-      ) : (
-        <Navbar /> 
-      )}
-      <>
-        {isMobileNavbar && isMobile && (
-          <MobileNavbar
-            onOpenNavbar={isMobileNavbar}
-            onCloseNavbar={mobileNavbarHandler}
+    <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
+      <div id={"header-container"}>
+        <img src={logo} alt="logo" width="100" />
+        {isMobile ? (
+          <FontAwesomeIcon
+            onClick={() => mobileNavbarHandler(true)}
+            id="header-bars-icon"
+            icon={solid('bars')}
           />
+        ) : (
+          <Navbar /> 
         )}
-      </>
-    </div>
+        <>
+          {isMobileNavbar && isMobile && (
+            <MobileNavbar
+              onOpenNavbar={isMobileNavbar}
+              onCloseNavbar={mobileNavbarHandler}
+            />
+          )}
+        </>
+      </div>
+    </ClosePageContext.Provider>
   );
 };
 

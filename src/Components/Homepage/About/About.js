@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './About.scss';
 import aboutPhoto from '../../../Assets/Img/about_img.png';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MobileViewContext } from "../../Context/MobileViewContext";
 
-const About = () => {
+const About = (props) => {
+  /* props.onClose pass a function to close
+    page "About" on mobile view only.
+  */
+
+  const isMobile = useContext(MobileViewContext);
+
   return (
     <div className="about-container">
-      <img className='about-image' src={aboutPhoto} alt="img" />
+      <div className="about-top">
+        <img className="about-image" src={aboutPhoto} alt="img" />
+        {isMobile && <FontAwesomeIcon
+          className="x-close"
+          icon={faCircleXmark}
+          onClick={props.onClose}
+        />}
+      </div>
       <div className="about-description">
-        <span className='about-desc-title'>
+        <span className="about-desc-title">
           Quem <span className="about-desc-title-bold">somos</span>
         </span>
         <p>

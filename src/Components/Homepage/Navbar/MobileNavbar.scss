@@ -10,20 +10,41 @@
 	width: 100%;
 }
 
-.modal-transition-enter {
+/* CSSTransition to open the mobile navbar */
+.mobile-navbar-transition-enter {
 	transform: translateY(-100%);
 }
 
-.modal-transition-enter-active {
+.mobile-navbar-transition-enter-active {
 	transform: translateY(0);
 	transition: transform 500ms ease-in-out;
 }
 
-.modal-transition-exit {
+.mobile-navbar-transition-exit {
 	transform: translateY(0);
 }
 
-.modal-transition-exit-active {
+.mobile-navbar-transition-exit-active {
 	transform: translateY(-100%);
+	transition: transform 500ms ease-in-out;
+}
+
+/* CSSTransition to open a 
+page when a mobile navbar item is clicked */
+.navbar-item-transition-enter{
+	transform: translateY(100%);
+}
+
+.navbar-item-transition-enter-active{
+	transform: translateY(0);
+	transition: transform 500ms ease-in-out;
+}
+
+.navbar-item-transition-exit{
+	transform: translateY(0);
+}
+
+.navbar-item-transition-exit-active{
+	transform: translateY(100%);
 	transition: transform 500ms ease-in-out;
 }
