@@ -68,25 +68,18 @@ const MobileNavbar = (props) => {
       * It will only be set to "auto" when mobile navbar is removed from the DOM.
       * You can check for it in mobileNavbarHandler in Header component.
     */
-  const [interrupt, setInterrupt] = useState(false);
   useEffect(() => {
-    if (interrupt) return;
-
     // #1
     if (props.onOpenNavbar && !isNavbarOpen) {
       setIsNavbarOpen(true);
-      console.log('#1 called the if')
     }
 
     // #2
     if (onBtnClose){
       navbarItemHandler("close_page", "")      
-      console.log('#2 called the if')
       setOnCloseBtn(false);
-      setInterrupt(true);
     } else {
       document.body.style.overflow = 'hidden';
-      console.log('#2 called the else')
     }
 
   }, [props.onOpenNavbar, onBtnClose]);

@@ -5,6 +5,7 @@ import aboutPhoto from '../../../Assets/Img/about_img.png';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MobileViewContext } from "../../Context/MobileViewContext";
+import CloseButton from "../../Utils/CloseButton";
 
 const About = (props) => {
   /* props.onClose pass a function to close
@@ -17,10 +18,8 @@ const About = (props) => {
     <div className="about-container">
       <div className="about-top">
         <img className="about-image" src={aboutPhoto} alt="img" />
-        {isMobile && <FontAwesomeIcon
-          className="x-close"
-          icon={faCircleXmark}
-          onClick={props.onClose}
+        {isMobile && <CloseButton
+          onClose={props.onClose}
         />}
       </div>
       <div className="about-description">

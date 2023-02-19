@@ -1,0 +1,14 @@
+.contact-container{
+	position: relative;
+	top: 532px;
+	background-color: #000E28;
+	color: white;
+}
+
+@media screen and (max-width: 800px){
+	.contact-container{
+		top: 0;
+		height: 100vh;
+		width: 100vw;
+	}
+}
