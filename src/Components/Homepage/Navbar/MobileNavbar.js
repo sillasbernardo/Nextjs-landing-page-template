@@ -111,7 +111,7 @@ const MobileNavbar = (props) => {
           <div className="mobile-navbar">
             <NavbarItem onClick={() => navbarItemHandler("load_page", "about")} iconName={faPeopleGroup} navItemTitle="Quem somos" />
             <NavbarItem onClick={() => navbarItemHandler("load_page", "services")} iconName={faLightbulb} navItemTitle="Serviços" />
-            <NavbarItem onClick={() => navbarItemHandler("load_page", "partners")} iconName={faHandshake} navItemTitle="Parceiros" />
+            {/* <NavbarItem onClick={() => navbarItemHandler("load_page", "partners")} iconName={faHandshake} navItemTitle="Parceiros" /> */}
             <NavbarItem onClick={() => navbarItemHandler("load_page", "contact")} iconName={faHeadset} navItemTitle="Contato" />
           </div>
         </Modal>

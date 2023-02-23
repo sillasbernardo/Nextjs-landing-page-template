@@ -3,6 +3,109 @@
 	top: 532px;
 	background-color: #000E28;
 	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding: 25px 0;
+
+	.contact-left{
+		display: inherit;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.contact-title{
+			font-size: 28pt;
+			font-weight: bold;
+
+			.contact-title-yellow{
+				color: #FBBC05;
+			}
+		}
+
+		.contact-left-logo{
+			width: 150px;
+		}
+
+		.contact-info{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			.socialmedia-item{
+				display: flex;
+				align-items: center;
+				margin: 5px 0;
+				cursor: pointer;
+
+				.socialmedia-logo{
+					margin-right: 10px;
+				}
+
+				.socialmedia-info{
+					font-size: 10pt;
+				}
+			}
+		}
+	}
+
+	.contact-right{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		input{
+			margin: 5px 0;
+			height: 30px;
+			padding: 0 10px;
+			background-color: #737373;
+			color: white;		
+			width: 300px;
+			outline-style: none;
+			border-style: none;
+			border-radius: 10px;
+			font-size: 10pt;
+		}
+
+		input::placeholder{
+			color: #C3C3C3;
+		}
+
+		textarea{
+			margin: 5px 0;
+			resize: none;
+			padding: 10px;
+			background-color: #737373;
+			color: white;
+			width: 300px;
+			outline-style: none;
+			border-style: none;
+			border-radius: 10px;
+			font-size: 10pt;
+		}
+		
+		textarea::placeholder{
+			color: #C3C3C3;
+		}
+
+		.contact-btn{
+			width: 150px;
+			height: 30px;
+			background-color: #FBBC05;
+			color: #131313;
+			font-weight: bold;
+			border-style: none;
+			border-radius: 10px;
+			margin-top: 10px;
+			cursor: pointer;
+		}
+
+		.contact-btn:hover{
+			background-color: #131313;
+			color: #FBBC05;
+		}
+	}
 }
 
 @media screen and (max-width: 800px){
@@ -10,5 +113,11 @@
 		top: 0;
 		height: 100vh;
 		width: 100vw;
+		flex-direction: column;
+		padding: 80px 0;
+
+		.contact-right{
+			padding: 40px 0;
+		}
 	}
 }

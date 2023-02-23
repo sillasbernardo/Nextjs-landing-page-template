@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import CallToAction from '../CallToAction';
+import CallToAction from '../../Utils/CallToAction';
 import ImageSlide from './ImageSlide';
 import './Presentation.scss';
 import { MobileViewContext } from '../../Context/MobileViewContext';

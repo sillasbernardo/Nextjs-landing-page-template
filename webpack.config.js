@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
 	module: {
@@ -30,11 +30,17 @@ module.exports = {
 			}
 		]
 	},
+	resolve: {
+		fallback: {
+			fs: false
+		}
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: "./index.html",
 			filename: "index.html"
-		})
+		}),
+		new NodePolyfillPlugin()
 	],
 	optimization: {
 		minimize: true,
@@ -46,5 +52,5 @@ module.exports = {
 		headers: {
 			'Cache-Control': 'no-cache'
 		}
-	}
+	},
 }

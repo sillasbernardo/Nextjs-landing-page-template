@@ -7,7 +7,7 @@ import './CloseButton.scss';
 const CloseButton = (props) => {
 	return (
 		<FontAwesomeIcon
-          className="x-close"
+          className={props.className || "x-close"}
           icon={faCircleXmark}
           onClick={props.onClose}
         />

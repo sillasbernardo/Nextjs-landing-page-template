@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 
 import Header from "../Components/Homepage/Header/Header";
 import Presentation from "../Components/Homepage/Presentation/Presentation";
@@ -15,16 +15,40 @@ import Contact from "../Components/Homepage/Contact/Contact";
 const Homepage = () => {
 	const isMobile = useContext(MobileViewContext);
 
+	const reviewRef = useRef(null);
+	const aboutRef = useRef(null);
+	const servicesRef = useRef(null);
+	const partnersRef = useRef(null);
+
+	const onPagesHandler = (page) => {
+		switch (page){
+			case "review":
+				reviewRef.current.scrollIntoView({ behavior: 'smooth' });
+				break
+			case "about":
+				aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+				break
+			case "services":
+				servicesRef.current.scrollIntoView({ behavior: 'smooth' });
+				break
+			case "partners":
+				partnersRef.current.scrollIntoView({ behavior: 'smooth' });
+				break
+			default:
+				return console.error('Error while loading page, check the page name and try again.')
+		}
+	}
+
 	return (
 		<div id="homepage-container">
-			<Header />
+			<Header onScrollClick={onPagesHandler} />
 			<Presentation />
 			<Awards />
-			<Reviews />
-			{!isMobile && <About />}
-			{!isMobile && <Services />}
-			{!isMobile && <Partners />}
-			{!isMobile && <Contact />}
+			<Reviews ref={reviewRef} />
+			{!isMobile && <About ref={aboutRef} />}
+			{!isMobile && <Services ref={servicesRef} />}
+			<Partners ref={partnersRef}/>
+			{!isMobile && <Contact/>}
 			<Footer />
 		</div>
 	)

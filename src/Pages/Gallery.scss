@@ -1,0 +1,28 @@
+.gallery-main-component {
+	background-color: #F5F5F5;
+	height: 100%;
+
+  .gallery-main-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+		margin: 20px 0;
+
+    .line-decoration {
+      width: 200px;
+      height: 3px;
+      margin: 0 20px;
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+      );
+    }
+
+		.gallery-main-title{
+			font-family: Angelface;
+			font-size: 30pt;
+		}
+  }
+}

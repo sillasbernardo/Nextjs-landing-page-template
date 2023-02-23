@@ -19,7 +19,7 @@ const PartnerItem = (props) => {
   );
 };
 
-const Partners = (props) => {
+const Partners = React.forwardRef((props, ref) => {
   const dummy_partners = [
     { id: 1, image: partnerImage, contact: '' },
     { id: 2, image: partnerImage, contact: '' },
@@ -32,12 +32,12 @@ const Partners = (props) => {
   const isMobile = useContext(MobileViewContext)
 
   return (
-    <div className='partners-container'>
+    <div ref={ref} className='partners-container'>
       <span className="partners-title">
         Nós trabalhamos com os melhores
         <span className="partners-title-highlight">parceiros</span>
       </span>
-      {isMobile && <CloseButton onClose={props.onClose} />}
+      {/* {isMobile && <CloseButton onClose={props.onClose} />} */}
 			<div className='partners-bottom'>
 				<div className="partners-list">
 					{dummy_partners.map((partner) => {
@@ -53,6 +53,6 @@ const Partners = (props) => {
 			</div>
     </div>
   );
-};
+});
 
 export default Partners;

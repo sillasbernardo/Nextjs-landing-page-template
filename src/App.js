@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import Homepage from "./Pages/Homepage";
+import Gallery from "./Pages/Gallery";
+import ErrorPage from "./Pages/404";
 import { MobileViewContext } from "./Components/Context/MobileViewContext";
 import { useWindowSize } from "./Components/Utils/useWindowSize";
 
@@ -19,9 +22,22 @@ const App = () => {
 		}
 	}, [width])
 
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: <Homepage />,
+			errorElement: <ErrorPage />
+		},
+		{
+			path: "/gallery",
+			element: <Gallery />,
+			errorElement: <ErrorPage />
+		}
+	])
+
 	return (
 		<MobileViewContext.Provider value={isMobile}>
-			<Homepage />
+			<RouterProvider router={router} />
 		</MobileViewContext.Provider>
 	)
 }

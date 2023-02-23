@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MobileViewContext } from "../../Context/MobileViewContext";
 import CloseButton from "../../Utils/CloseButton";
 
-const About = (props) => {
+const About = React.forwardRef((props, ref) => {
   /* props.onClose pass a function to close
     page "About" on mobile view only.
   */
@@ -15,7 +15,7 @@ const About = (props) => {
   const isMobile = useContext(MobileViewContext);
 
   return (
-    <div className="about-container">
+    <div ref={ref} className="about-container">
       <div className="about-top">
         <img className="about-image" src={aboutPhoto} alt="img" />
         {isMobile && <CloseButton
@@ -63,6 +63,6 @@ const About = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default About;

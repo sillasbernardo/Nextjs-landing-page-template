@@ -5,7 +5,7 @@ import './Reviews.scss';
 import { loadReviewImages } from './ReviewHandler';
 import ReviewImage from './ReviewImage';
 
-const Reviews = () => {
+const Reviews = React.forwardRef((props, ref) => {
   const [reviewImages, setReviewImages] = useState([]);
   const imageRef1 = useRef(null);
   const imageRef2 = useRef(null);
@@ -35,7 +35,7 @@ const Reviews = () => {
  */
 
   return (
-    <div className="reviews-container">
+    <div ref={ref} className="reviews-container">
       <span className="reviews-title">
         Veja o que <span className="reviews-title-bold">nossos clientes</span>{' '}
         estão dizendo
@@ -63,6 +63,6 @@ const Reviews = () => {
       )}
     </div>
   );
-};
+});
 
 export default Reviews;

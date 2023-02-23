@@ -9,7 +9,7 @@ import { ClosePageContext } from '../../Context/ClosePageContext';
 import Navbar from '../Navbar/Navbar';
 import MobileNavbar from '../Navbar/MobileNavbar';
 
-const Header = () => {
+const Header = (props) => {
   /*
    * This context makes all mobile rendering in Header when set to true
    */
@@ -45,7 +45,7 @@ const Header = () => {
             icon={solid('bars')}
           />
         ) : (
-          <Navbar /> 
+          <Navbar onScrollClick={props.onScrollClick} /> 
         )}
         <>
           {isMobileNavbar && isMobile && (

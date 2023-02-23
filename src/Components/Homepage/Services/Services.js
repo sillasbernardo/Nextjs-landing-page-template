@@ -47,7 +47,7 @@ const GalleryViewItem = (props) => {
   );
 };
 
-const Services = (props) => {
+const Services = React.forwardRef((props, ref) => {
   const isMobile = useContext(MobileViewContext);
 
   const dummy_services = [
@@ -63,7 +63,7 @@ const Services = (props) => {
   ];
 
   return (
-    <div className="services-container">
+    <div ref={ref} className="services-container">
       <div className="services-title-container">
         <span id="services-title">
           Nossos <span id="services-title-yellow">serviços</span>
@@ -86,6 +86,6 @@ const Services = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default Services;

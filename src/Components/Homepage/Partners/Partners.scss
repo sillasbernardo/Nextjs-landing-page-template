@@ -40,6 +40,7 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 20px;
       max-width: 1000px;
       width: 70%;
 
@@ -75,7 +76,6 @@
 
 @media screen and (max-width: 800px) {
   .partners-container {
-    top: 0;
     height: 100vh;
 
     .partners-title {
