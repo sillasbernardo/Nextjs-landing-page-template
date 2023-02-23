@@ -37,7 +37,7 @@ const Header = (props) => {
   return (
     <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
       <div id={"header-container"}>
-        <img src={logo} alt="logo" width="100" />
+        <img src="https://drive.google.com/file/d/1DdPgyW7dc-JChfUV5PymmhL37B_905-k/view" alt="logo" width="100" />
         {isMobile ? (
           <FontAwesomeIcon
             onClick={() => mobileNavbarHandler(true)}
