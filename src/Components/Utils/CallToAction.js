@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeadset } from "@fortawesome/free-solid-svg-icons";
-import dotenv from "dotenv";
-dotenv.config();
-import axios from "axios";
+import { fetchApi } from "./fetchApi";
 
 import './CallToAction.scss';
 
@@ -11,18 +9,7 @@ const CallToAction = () => {
 
 	/* Store data from API */
 	const [apiData, setApiData] = useState();
-
-	useEffect(() => {
-		const loadData = async () => {
-			const api = await axios.get("http://localhost:5000/api/calltoaction" || "/api/calltoaction", {
-				headers: {
-					Authorization: process.env.REACT_APP_API_KEY
-				}
-			})
-			setApiData(api.data.calltoactionData);
-		}
-		loadData();
-	}, [])
+	fetchApi("api/calltoaction", setApiData, "calltoactionData");
 
 	if (apiData){
 		return (

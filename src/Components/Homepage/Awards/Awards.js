@@ -4,24 +4,13 @@ import { faAward } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 import './Awards.scss';
+import { fetchApi } from '../../Utils/fetchApi';
 
 const Awards = () => {
   const [apiData, setApiData] = useState();
-
-  useEffect(() => {
-    const loadData = async () => {
-      const api = await axios.get("http://localhost:5000/api/awards" || "/api/awards", {
-        headers: {
-          Authorization: process.env.REACT_APP_API_KEY
-        }
-      });
-      setApiData(api.data.awardsData)
-    }
-    loadData();
-  }, [])
+  fetchApi("api/awards", setApiData, "awardsData");
 
   if (apiData){
-
     return (
         <div className="awards-container">
           <span className="awards-text">

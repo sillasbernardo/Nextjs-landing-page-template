@@ -1,4 +1,4 @@
- import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import React, { StrictMode } from "react";
 
 import App from "./App";

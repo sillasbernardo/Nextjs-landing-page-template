@@ -28,9 +28,12 @@
 			}
 		}
 
-		p{
+		.description-text{
 			width: 500px;
 			text-align: justify;
+			pre{
+				white-space: pre-wrap;
+			}
 		}
 	}
 }

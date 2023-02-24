@@ -36,9 +36,9 @@ const App = () => {
 	])
 
 	return (
-		<MobileViewContext.Provider value={isMobile}>
-			<RouterProvider router={router} />
-		</MobileViewContext.Provider>
+			<MobileViewContext.Provider value={isMobile}>
+				<RouterProvider router={router} />
+			</MobileViewContext.Provider>
 	)
 }
 

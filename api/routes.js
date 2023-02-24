@@ -1,7 +1,12 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const http = require("http");
 
 const { readJsonFile } = require("./readJsonFile");
+const { loadGoogleDriveData } = require('./googleDriveApi');
+const mammoth = require('mammoth');
+const axios = require('axios');
 
 const router = express.Router();
 
@@ -15,15 +20,51 @@ router.get("*", (req, res, next) => {
 	}
 })
 
+// logo endpoint
+router.get("/api/logo", async (req, res, next) => {
+	try {
+		const logoData = await loadGoogleDriveData("logo");
+		res.json({ logoData })
+	} catch (error) {
+		res.status(500).send(`Internal server error. Error: ${error}`)
+	}
+})
+
 // calltoaction endpoint
 router.get("/api/calltoaction", async (req, res, next) => {
 	try {
 		const calltoactionData = await readJsonFile("calltoaction");
 		res.json({ calltoactionData });
 	} catch (error) {
-		console.error(error);
-		res.status(500).send('Internal server error.')
+		res.status(500).send(`Internal server error. Error: ${error}`)
 	}
+})
+
+// presentation endpoint
+router.get("/api/presentation", async (req, res, next) => {
+	try {
+		const presentationData = await loadGoogleDriveData("presentation");
+		res.json({ presentationData });
+	} catch (error) {
+		res.status(500).send(`Internal server error. Error: ${error}`)
+	}
+})
+
+// reviews endpoint
+router.get("/api/reviews", async (req, res, next) => {
+	try {
+		const reviewsData = await loadGoogleDriveData("reviews")
+		res.json({ reviewsData })
+	} catch (error) {
+		res.status(500).send(`Internal server error. Error: ${error}`)
+	}
+})
+
+// about endpoint
+router.get("/api/about", async (req, res, next) => {
+	let aboutData;
+
+	
 })
 
 // awards endpoint

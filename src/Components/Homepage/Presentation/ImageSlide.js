@@ -1,27 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useEffect } from 'react';
 
 import './ImageSlide.scss';
 import ButtonSlider from './ButtonSlider';
-import { loadSliderImages, handlerSlideBtn } from "./SliderHandler";
+import { handlerSlideBtn } from "./SliderHandler";
+import { fetchApi } from "../../Utils/fetchApi";
 
 const ImageSlide = () => {
   const [images, setImages] = useState([]); // Store images to be slided
   const [slideIndex, setSlideIndex] = useState(1); // Store the actual index of image in row
 
-  /* 
-    * Fetch images from loadImages()
-   */
-  useEffect(() => {
-    loadSliderImages().then((result) => {
-      const imagesArray = result.map((image) => ({ id: uuidv4(), image }));
-      setImages(imagesArray);
-    });
-  }, []);
+  /* Fetch images from API */
+  fetchApi("api/presentation/", setImages, "presentationData");
 
-  /* 
-    * Upload slider every "timer" miliseconds
-  */
+  /* Upload slide image every 'timer' milliseconds */
   const timer = 7000;
   useEffect(() => {
     if (slideIndex > images.length){
@@ -41,13 +32,13 @@ const ImageSlide = () => {
         images.map((image, index) => {
           return (
             <div
-              key={image.id}
+              key={image.name}
               className={
                 slideIndex === index + 1 ? 'slide active-anim' : 'slide'
               }
             >
               <div id='gray-foreground'></div>
-              <img src={image.image} alt="img" />
+              <img src={image.link} alt="img" />
             </div>
           );
         })}
