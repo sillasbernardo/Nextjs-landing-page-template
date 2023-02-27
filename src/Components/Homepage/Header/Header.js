@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
@@ -9,7 +9,7 @@ import Navbar from '../Navbar/Navbar';
 import MobileNavbar from '../Navbar/MobileNavbar';
 import logo from "../../../Assets/Img/logo.gif"
 
-const Header = (props) => {
+const Header = forwardRef((props, ref) => {
   /*
    * This context makes all mobile rendering in Header when set to true
    */
@@ -35,7 +35,7 @@ const Header = (props) => {
 
   return (
     <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
-      <div id={'header-container'}>
+      <div ref={ref} id={'header-container'}>
         <img
           src={logo}
           alt="logo"
@@ -61,6 +61,6 @@ const Header = (props) => {
       </div>
     </ClosePageContext.Provider>
   );
-};
+});
 
 export default Header;

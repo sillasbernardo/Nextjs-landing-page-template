@@ -2,11 +2,13 @@ import React from "react";
 
 import './CategoryItem.scss';
 
-const CategoryItem = () => {
+const CategoryItem = (props) => {
 	return (
-		<div className="gallery-cat-item">
-			<span className="gallery-cat-title">Casamentos</span>
-		</div>
+		<>
+			{props.name && <div className="gallery-cat-item">
+				<span className="gallery-cat-title">{props.name}</span>
+			</div>}
+		</>
 	)
 }
 

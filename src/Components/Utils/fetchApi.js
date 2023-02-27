@@ -19,7 +19,7 @@ export const fetchApi = (path, setData, loader) => {
 
 	useEffect(() => {
 		const loadData = async () => {
-			const api = await axios.get(`http://localhost:5000/${path}` || path, {
+			const api = await axios.get(`http://localhost:5000/${path}`, {
 				headers: {
 					Authorization: process.env.REACT_APP_API_KEY
 				}

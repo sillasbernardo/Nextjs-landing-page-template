@@ -1,35 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import './Partners.scss';
-import partnerImage from '../../../Assets/Img/PartnersImage/partnerimage.png';
 import CloseButton from '../../Utils/CloseButton';
 import { MobileViewContext } from '../../Context/MobileViewContext';
+import { fetchApi } from '../../Utils/fetchApi';
 
 const PartnerItem = (props) => {
   return (
     <div className="partner-item">
       <img src={props.image} alt="img" />
       <button
-        onClick={() => console.log('Here goes the contact')}
         className="partner-contact-button"
       >
-        Entre em contato
+        <a href={props.contact}>Entre em contato</a>
       </button>
     </div>
   );
 };
 
 const Partners = React.forwardRef((props, ref) => {
-  const dummy_partners = [
-    { id: 1, image: partnerImage, contact: '' },
-    { id: 2, image: partnerImage, contact: '' },
-    { id: 3, image: partnerImage, contact: '' },
-    { id: 4, image: partnerImage, contact: '' },
-    { id: 5, image: partnerImage, contact: '' },
-    { id: 6, image: partnerImage, contact: '' },
-  ];
 
   const isMobile = useContext(MobileViewContext)
+
+  const [apiData, setApiData] = useState();
+
+  fetchApi("api/partners", setApiData, "partnersData")
 
   return (
     <div ref={ref} className='partners-container'>
@@ -38,19 +33,19 @@ const Partners = React.forwardRef((props, ref) => {
         <span className="partners-title-highlight">parceiros</span>
       </span>
       {/* {isMobile && <CloseButton onClose={props.onClose} />} */}
-			<div className='partners-bottom'>
+			{apiData && <div className='partners-bottom'>
 				<div className="partners-list">
-					{dummy_partners.map((partner) => {
+					{apiData.map((partner, index) => {
 						return (
 							<PartnerItem
-								key={partner.id}
-								image={partner.image}
-								contact={partner.contact}
+								key={index}
+								image={partner.imageLink}
+								contact={partner.partnerLink}
 							/>
 						);
 					})}
 				</div>				
-			</div>
+			</div>}
     </div>
   );
 });

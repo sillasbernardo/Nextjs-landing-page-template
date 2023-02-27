@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import CategoryItem from "./CategoryItem";
 import './CategorySection.scss';
+import { fetchApi } from "../../Utils/fetchApi";
 
 const CategorySection = () => {
+
+	const [apiData, setApiData] = useState();
+	fetchApi("api/gallery/categories", setApiData, "categoriesData")
+
 	return (
 		<div className="category-section-container">
-			{Array.from({length: 3}).map((item) => {
+			{apiData && apiData.map((category, index) => {
 				return (
-					<CategoryItem key={Math.random()} />
+					<CategoryItem key={index} name={category}/>
 				)
 			})}
 		</div>

@@ -1,8 +1,7 @@
-import addressLogo from '../../../Assets/Img/ContactImages/address.png';
-import facebookLogo from '../../../Assets/Img/ContactImages/facebook.png';
-import gmailLogo from '../../../Assets/Img/ContactImages/gmail.png';
-import instagramLogo from '../../../Assets/Img/ContactImages/instagram.png';
-import whatsappLogo from '../../../Assets/Img/ContactImages/whatsapp.png';
+
+import { useState } from 'react';
+
+
 
 export const socialMediaLinks = [
 	{

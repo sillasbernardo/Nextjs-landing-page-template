@@ -15,3 +15,15 @@ export const useWindowSize = () => {
 
 	return width;
 }
+
+export const useScrollY = () => {
+	const [scrollY, setScrollY] = useState(window.screenY);
+
+	useEffect(() => {
+		const handleScroll = () => setScrollY(window.screenY);
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	})
+
+	return scrollY;
+}

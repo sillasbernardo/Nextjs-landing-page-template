@@ -8,10 +8,7 @@ import './Showcase.scss';
 const items = [];
 
 const Showcase = () => {
- 
-  
-
- /* Handles paginatation */
+  /* Handles paginatation */
   let itemsPerPage = 16;
 
   const showcaseRef = useRef(null);

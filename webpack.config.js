@@ -48,6 +48,7 @@ module.exports = {
 	},
 	devServer: {
 		hot: true,
+		static: true,
 		historyApiFallback: true,
 		headers: {
 			'Cache-Control': 'no-cache'

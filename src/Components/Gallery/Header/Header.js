@@ -47,7 +47,7 @@ const Header = () => {
                 icon={faBars}
               />
             )}
-            <span className="gallery-header-title">Casamentos</span>
+            <span className="gallery-header-title">Galeria de fotos</span>
             <Link to={`/`}>
               <CloseButton className="gallery-close-btn" />            
             </Link>

@@ -11,10 +11,12 @@ import Footer from "../Components/Homepage/Footer/Footer";
 import { MobileViewContext } from "../Components/Context/MobileViewContext";
 import Partners from "../Components/Homepage/Partners/Partners";
 import Contact from "../Components/Homepage/Contact/Contact";
+import ScrollUp from "../Components/Homepage/ScrollUp";
 
 const Homepage = () => {
 	const isMobile = useContext(MobileViewContext);
 
+	const headerRef = useRef(null);
 	const reviewRef = useRef(null);
 	const aboutRef = useRef(null);
 	const servicesRef = useRef(null);
@@ -22,6 +24,9 @@ const Homepage = () => {
 
 	const onPagesHandler = (page) => {
 		switch (page){
+			case "header":
+				headerRef.current.scrollIntoView({ behavior: 'smooth' });
+				break;
 			case "review":
 				reviewRef.current.scrollIntoView({ behavior: 'smooth' });
 				break
@@ -41,7 +46,8 @@ const Homepage = () => {
 
 	return (
 		<div id="homepage-container">
-			<Header onScrollClick={onPagesHandler} />
+			<ScrollUp onClickHandler={() => onPagesHandler("header")} />
+			<Header ref={headerRef} onScrollClick={onPagesHandler} />
 			<Presentation />
 			<Awards />
 			<Reviews ref={reviewRef} />

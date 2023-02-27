@@ -6,5 +6,27 @@
 	"awards": {
 		"quantity": "10",
 		"years": "3"
-	}
+	},
+	"contact": [
+		{
+			"icon": "https://drive.google.com/uc?export=view&id=1LzLN71lrJmDDBo5ycPTOH-74gL9fBfYE",
+			"info": "71 00000-0000"
+		},
+		{
+			"icon": "https://drive.google.com/uc?export=view&id=1Vvw04TPVApnzXnmIPFPEAWo8X0WOyqOH",
+			"info": "@gbiluminacoes"
+		},
+		{
+			"icon": "https://drive.google.com/uc?export=view&id=13R0jJ5alwfBZFqEKmR-ihSkVsjTrnGG2",
+			"info": "gbiluminacoes@gmail.com"
+		},
+		{
+			"icon": "https://drive.google.com/uc?export=view&id=1tlKFYd9_UZIQJihEm4EnldqVPZBm9I2C",
+			"info": "GB Iluminações"
+		},
+		{
+			"icon": "https://drive.google.com/uc?export=view&id=1k2KCYaQ6IErae8PrtzDbNWlSzUrdJHRE",
+			"info": "Rua Manoel Joaquim Borges, Catu, BA - Brasil"
+		}
+	]
 }
