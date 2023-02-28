@@ -9,15 +9,25 @@ import { fetchApi } from '../../Utils/fetchApi';
 const Showcase = () => {
 
   const [apiData, setApiData] = useState();
+	fetchApi("api/gallery/images", setApiData, "images")
   let items = [];
 
-	fetchApi("api/gallery/images", setApiData, "images")
-
-  console.log(apiData)
-  /* TODO: Return the category of the item */
-
   if (apiData){
-    apiData.map(data => items.push(data.link))
+    apiData.map(data => {
+      let categoryName;
+
+      // remove "-gallery" from original name and uppercase first letter
+      const changeName = () => {
+        categoryName = data.category.split("-").shift();
+        categoryName = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+      }
+      changeName();
+
+      items.push({
+        link: data.link,
+        category: categoryName
+      })
+    })
   }
 
   /* Handles paginatation */
@@ -39,6 +49,8 @@ const Showcase = () => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };
+
+  console.log(currentItems.slice(1, 2))
 
   return (
     <div className="showcase-container" ref={showcaseRef}>

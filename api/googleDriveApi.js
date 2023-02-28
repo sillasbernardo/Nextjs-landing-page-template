@@ -50,7 +50,8 @@ const loadGoogleDriveData = (folder) => {
 
 					const filesResult = {
 						name: file.name,
-						link: `https://drive.google.com/uc?export=view&id=${file.id}`
+						link: `https://drive.google.com/uc?export=view&id=${file.id}`,
+						category: folder
 					}
 					
 					filesArr.push(filesResult);
@@ -90,7 +91,7 @@ const loadSubfolders = (folder) => {
 					res.data.files.forEach(file => {
 						const fileResult = {
 							name: file.name,
-							id: file.id
+							id: file.id,
 						}
 
 						foldersArray.push(fileResult);
