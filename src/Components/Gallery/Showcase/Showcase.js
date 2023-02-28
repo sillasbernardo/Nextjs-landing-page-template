@@ -4,10 +4,22 @@ import axios from 'axios';
 import ShowcaseItem from './ShowcaseItem';
 import ShowcasePaginate from './ShowcasePaginate';
 import './Showcase.scss';
-
-const items = [];
+import { fetchApi } from '../../Utils/fetchApi';
 
 const Showcase = () => {
+
+  const [apiData, setApiData] = useState();
+  let items = [];
+
+	fetchApi("api/gallery/images", setApiData, "images")
+
+  console.log(apiData)
+  /* TODO: Return the category of the item */
+
+  if (apiData){
+    apiData.map(data => items.push(data.link))
+  }
+
   /* Handles paginatation */
   let itemsPerPage = 16;
 
@@ -19,8 +31,8 @@ const Showcase = () => {
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const currentItems = items && items.slice(itemOffset, endOffset);
+  const pageCount = items && Math.ceil(items.length / itemsPerPage);
   const handlePageClick = (event) => {
     showcaseRef.current.scrollIntoView({ behavior: 'smooth' });
     setSelectedPage(event.selected);
@@ -37,7 +49,7 @@ const Showcase = () => {
           selectedPage={selectedPage}
           pageCount={pageCount}
         />
-        <h4 className='no-images'>Nenhuma imagem foi encontrada.</h4>
+        {currentItems === 0 && <h4 className='no-images'>Nenhuma imagem foi encontrada.</h4>}
         <div className="image-grid">
           <ShowcaseItem
             type="image"
@@ -45,7 +57,7 @@ const Showcase = () => {
             items={currentItems.slice(0, 1)}
           />
           <ShowcaseItem type="image" items={currentItems.slice(1, 5)} />
-          {currentItems.length > 6 && <ShowcaseItem
+          {currentItems.length > 4 && <ShowcaseItem
             type="text"
             textMessage="Frase de casamento"
             className="fancy-text"

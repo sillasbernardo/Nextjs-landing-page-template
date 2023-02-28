@@ -59,6 +59,7 @@ const Header = () => {
     return (
       <div className="gallery-header-container">
         <img src={logo} width="100" alt="img" />
+        <span className="gallery-header-title">Galeria de fotos</span>
         <div className="gallery-header-navbar">
           <NavbarItem
             className="gallery-navbar-item"

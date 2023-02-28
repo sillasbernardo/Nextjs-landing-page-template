@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const { readJsonFile } = require('./readJsonFile');
-const { loadGoogleDriveData } = require('./googleDriveApi');
+const { loadGoogleDriveData, loadSubfolders } = require('./googleDriveApi');
 const mammoth = require('mammoth');
 const axios = require('axios');
 
@@ -61,7 +61,7 @@ router.get('/api/reviews', async (req, res, next) => {
 
 // about endpoint
 router.get('/api/about', async (req, res, next) => {
-	let aboutData;
+  let aboutData;
 
   try {
     const aboutRawData = await loadGoogleDriveData('about');
@@ -84,18 +84,20 @@ router.get('/api/about', async (req, res, next) => {
       }
     });
 
-    mammoth.convertToHtml({ path: "./data/document.docx" })
-			.then(result => {
-				aboutData = {
-					document: result.value,
-					image: aboutRawData.filter(data => data.name !== "description.docx")
-				}
-				res.json({ aboutData })
-			})
-			.catch(error => {
-				res.status(500).send(`Internal server error. Error: ${error}`);
-			})
-
+    mammoth
+      .convertToHtml({ path: './data/document.docx' })
+      .then((result) => {
+        aboutData = {
+          document: result.value,
+          image: aboutRawData.filter(
+            (data) => data.name !== 'description.docx'
+          ),
+        };
+        res.json({ aboutData });
+      })
+      .catch((error) => {
+        res.status(500).send(`Internal server error. Error: ${error}`);
+      });
   } catch (error) {
     res.status(500).send(`Internal server error. Error: ${error}`);
   }
@@ -115,72 +117,104 @@ router.get('/api/awards', async (req, res, next) => {
 // Services endpoint
 router.get('/api/services', async (req, res, next) => {
   try {
-    let servicesData = await loadGoogleDriveData("services");
+    let servicesData = await loadGoogleDriveData('services');
 
-    servicesData = servicesData.map(data => {
+    servicesData = servicesData.map((data) => {
       return {
         link: data.link,
-        name: data.name.replace(".jpg", "")
-      }
-    })
-    res.json({ servicesData })
+        name: data.name.replace('.jpg', ''),
+      };
+    });
+    res.json({ servicesData });
   } catch (error) {
     res.status(500).send(`Internal server error. Error: ${error}`);
   }
-})
+});
 
 // Partners endpoint
 router.get('/api/partners', async (req, res, next) => {
   try {
     let partnersData = await loadGoogleDriveData('partners');
 
-    partnersData = partnersData.map(data => {
+    partnersData = partnersData.map((data) => {
       return {
         imageLink: data.link,
-        partnerLink: data.name.split("@").pop().split(".png").shift()
-      }
-    })
+        partnerLink: data.name.split('@').pop().split('.png').shift(),
+      };
+    });
 
-    res.json({ partnersData })
+    res.json({ partnersData });
   } catch (error) {
     res.status(500).send(`Internal server error. Error: ${error}`);
   }
-})
+});
 
 // Contact endpoint
 router.get('/api/contact', async (req, res, next) => {
   try {
-    const contactData = await readJsonFile("contact")
-    res.json({ contactData })
+    const contactData = await readJsonFile('contact');
+    res.json({ contactData });
   } catch (error) {
     res.status(500).send(`Internal server error. Error: ${error}`);
   }
-})
+});
 
 /* ------------- Gallery routes ---------------*/
 
 // Categories section endpoint
 router.get('/api/gallery/categories', async (req, res, next) => {
   try {
-    const services = await loadGoogleDriveData("services");
-    const categoriesData = services.map(service => {
-      return service.name.replace(".jpg", "");
-    })
-    res.json({ categoriesData })
+    const services = await loadGoogleDriveData('services');
+    const categoriesData = services.map((service) => {
+      return service.name.replace('.jpg', '');
+    });
+    categoriesData.unshift("Todos")
+    res.json({ categoriesData });
   } catch (error) {
     res.status(500).send(`Internal server error. Error: ${error}`);
   }
-})
+});
 
 // Category endpoint
-router.get('/api/gallery/categories/:cid', async (req, res, next) => {
-  
-})
+router.get('/api/gallery/categories/:cid', async (req, res, next) => {});
 
 // All images endpoint
 router.get('/api/gallery/images', async (req, res, next) => {
-  
-})
+
+  try {
+    // Load all categories existing
+    const getAllCategories = await loadSubfolders('categories');
+    // Returns a promise from all images in all categories
+    const getAllImages = getAllCategories.map((category) => {
+      const getData = loadGoogleDriveData(category.name);
+      return getData.then(result => result);
+    });
+
+    // Send a json response containing the images when promise is resolved
+    Promise.all(getAllImages).then(imagesArray => {
+      let images = [];
+
+      // imagesArray return two arrays of images
+      imagesArray.forEach(img => images.push(...img));
+
+      // Shuffle the array
+      for (let i = images.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i - 1));
+        [images[i], images[j]] = [images[j], images[i]];
+      }
+
+      /* Return the category of the image */
+
+      res.json({ images })
+    })
+  } catch (error) {
+    res
+      .status(500)
+      .send(
+        `Error while trying to fetch images from endpoint. Error: ${error}`
+      );
+  }
+});
 
 // Handles any requests that don't match the ones above
 router.get('*', (req, res) => {
