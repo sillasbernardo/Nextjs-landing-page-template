@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Homepage from './Pages/Homepage';
 import Gallery from './Pages/Gallery';
@@ -9,42 +9,23 @@ import { useWindowSize } from './Components/Utils/useWindowSize';
 import { GalleryCategoryContext } from './Components/Context/GalleryCategoryContext';
 
 const App = () => {
-  /*
-   * Define how pages and components will render based on the window width size.
-   */
-  const [isMobile, setIsMobile] = useState(false);
+  /* Define how pages and components will render based on the window width size.*/
   const width = useWindowSize();
+  const isMobile = width < 800;
 
-  useEffect(() => {
-    if (width < 800) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, [width]);
-
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Homepage />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: '/gallery',
-      element: <Gallery />,
-      errorElement: <ErrorPage />,
-    },
-  ]);
-
-  /*
-    * Define what category is being seen
-   */
+  /* Define what category is being seen */
   const [galleryCategory, setGalleryCategory] = useState('Todos');
 
   return (
     <GalleryCategoryContext.Provider value={[galleryCategory, setGalleryCategory]}>
       <MobileViewContext.Provider value={isMobile}>
-          <RouterProvider router={router} />
+          <Router>
+            <Routes>
+              <Route exact path="/" element={<Homepage />}/>
+              <Route exact path="/gallery" element={<Gallery />}/>
+              <Route element={<ErrorPage />}/>
+            </Routes>
+          </Router>
       </MobileViewContext.Provider>
     </GalleryCategoryContext.Provider>
   );

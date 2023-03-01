@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useCallback } from "react";
 
 import Header from "../Components/Homepage/Header/Header";
 import Presentation from "../Components/Homepage/Presentation/Presentation";
@@ -23,7 +23,7 @@ const Homepage = () => {
 	const servicesRef = useRef(null);
 	const partnersRef = useRef(null);
 
-	const onPagesHandler = (page) => {
+	const onPagesHandler = useCallback((page) => {
 		switch (page){
 			case "header":
 				headerRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -41,9 +41,9 @@ const Homepage = () => {
 				partnersRef.current.scrollIntoView({ behavior: 'smooth' });
 				break
 			default:
-				return console.error('Error while loading page, check the page name and try again.')
+				throw new Error(`Invalid page: ${page}`);
 		}
-	}
+	}, [headerRef, reviewRef, aboutRef, servicesRef, partnersRef])
 
 	return (
 		<div id="homepage-container">
