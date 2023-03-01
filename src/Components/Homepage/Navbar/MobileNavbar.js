@@ -4,7 +4,6 @@ import {
   faHeadset,
   faPeopleGroup,
   faLightbulb,
-  faHandshake,
 } from '@fortawesome/free-solid-svg-icons';
 
 import './MobileNavbar.scss';
@@ -14,10 +13,7 @@ import NavbarItemHandler from './NavbarItemHandler';
 import { MobileViewContext } from '../../Context/MobileViewContext';
 import { ClosePageContext } from '../../Context/ClosePageContext';
 
-/*  When navbarDispatch is called, navbarReducer updates the navbarState values
-    and send the updated value to NavbarItemHandler
-*/
-function navbarReducer(state, action){
+const navbarReducer = (state, action) => {
   switch (action.type){
     case "load_page":
       return {
@@ -34,7 +30,13 @@ function navbarReducer(state, action){
   }
 }
 
+const navbarInitializer = {
+  isItemClicked: false,
+  pageName: ""
+}
+
 const MobileNavbar = (props) => {
+  /* Handles how this component will render based on the device type */
   const isMobile = useContext(MobileViewContext);
 
   /*
@@ -43,15 +45,10 @@ const MobileNavbar = (props) => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   /*
-    * The useReducer manages the navbar state allowing a page to open when a navbar item is clicked.
-    * The page switches depending on the pageName.
+    * A reducer used to handle how the mobilenavbar behaves when rendered.
    */
-  const [ navbarState, navbarDispatch ] = useReducer(navbarReducer, {
-    isItemClicked: false,
-    pageName: ""
-  });
+  const [ navbarState, navbarDispatch ] = useReducer(navbarReducer, navbarInitializer);
 
-  /* useReducer's dispatch */
   const navbarItemHandler = (type, page) => navbarDispatch({ type, page });
 
   const [onBtnClose, setOnCloseBtn] = useContext(ClosePageContext);

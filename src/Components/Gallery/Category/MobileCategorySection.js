@@ -15,7 +15,7 @@ const MobileCategorySection = (props) => {
       <div className="mob-cat-section">
         {apiData && apiData.map((category, index) => {
           return (
-            <CategoryItem key={index} name={category}/>
+            <CategoryItem closeNavbar={props.closeNavbar} key={index} name={category}/>
           )
         })}
       </div>

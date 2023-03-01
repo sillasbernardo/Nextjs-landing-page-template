@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import './Services.scss';
@@ -7,6 +7,7 @@ import CloseButton from '../../Utils/CloseButton';
 import { fetchApi } from '../../Utils/fetchApi';
 import LoadingScreen from '../../Utils/LoadingScreen';
 import { Link } from 'react-router-dom';
+import { GalleryCategoryContext } from '../../Context/GalleryCategoryContext';
 
 const GalleryViewItem = (props) => {
   const [isGalleryView, setIsGalleryView] = useState(false);
@@ -16,6 +17,10 @@ const GalleryViewItem = (props) => {
       action === 'over' ? setIsGalleryView(true) : setIsGalleryView(false);
     }
   };
+
+  const [galleryCategory, setGalleryCategory] = useContext(
+    GalleryCategoryContext
+  );
 
   return (
     <div className="items-list-service">
@@ -34,7 +39,14 @@ const GalleryViewItem = (props) => {
           <>
             {isGalleryView && !props.isMobile && (
               <div className="gallery-circle">
-                <Link className="gallery-link" to={`/gallery`}>
+                <Link
+                  onClick={() => {
+                    setGalleryCategory(props.title);
+                    document.body.style.overflow = 'auto';
+                  }}
+                  className="gallery-link"
+                  to={`/gallery`}
+                >
                   <span>Ver galeria</span>
                 </Link>
               </div>
@@ -45,8 +57,15 @@ const GalleryViewItem = (props) => {
       </div>
       <span className="service-title">{props.title}</span>
       {props.isMobile && (
-        <Link className='gallery-link-button' to={`/gallery`}>
-          <button className="see-gallery-button">Ver galeria</button>        
+        <Link
+          onClick={() => {
+            setGalleryCategory(props.title);
+            document.body.style.overflow = 'auto';
+          }}
+          className="gallery-link-button"
+          to={`/gallery`}
+        >
+          <button className="see-gallery-button">Ver galeria</button>
         </Link>
       )}
     </div>
@@ -66,26 +85,28 @@ const Services = React.forwardRef((props, ref) => {
 
   return (
     <>
-      {apiData && <div ref={ref} className="services-container">
-        <div className="services-title-container">
-          <span id="services-title">
-            Nossos <span id="services-title-yellow">serviços</span>
-          </span>
-          {isMobile && <CloseButton onClose={props.onClose} />}
+      {apiData && (
+        <div ref={ref} className="services-container">
+          <div className="services-title-container">
+            <span id="services-title">
+              Nossos <span id="services-title-yellow">serviços</span>
+            </span>
+            {isMobile && <CloseButton onClose={props.onClose} />}
+          </div>
+          <div className="services-items-list">
+            {apiData.map((service, index) => {
+              return (
+                <GalleryViewItem
+                  key={index}
+                  image={service.link}
+                  title={service.name}
+                  isMobile={isMobile}
+                />
+              );
+            })}
+          </div>
         </div>
-        <div className="services-items-list">
-          {apiData.map((service, index) => {
-            return (
-              <GalleryViewItem
-                key={index}
-                image={service.link}
-                title={service.name}
-                isMobile={isMobile}
-              />
-            );
-          })}
-        </div>
-      </div>}
+      )}
     </>
   );
 });

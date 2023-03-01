@@ -16,6 +16,7 @@ import ScrollUp from "../Components/Homepage/ScrollUp";
 const Homepage = () => {
 	const isMobile = useContext(MobileViewContext);
 
+	/* These refs are used to smooth scroll to the component when a navbar item is clicked */
 	const headerRef = useRef(null);
 	const reviewRef = useRef(null);
 	const aboutRef = useRef(null);

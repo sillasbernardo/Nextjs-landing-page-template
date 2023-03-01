@@ -5,9 +5,9 @@ import ButtonSlider from './ButtonSlider';
 import { handlerSlideBtn } from "./SliderHandler";
 import { fetchApi } from "../../Utils/fetchApi";
 
-const ImageSlide = () => {
-  const [images, setImages] = useState([]); // Store images to be slided
-  const [slideIndex, setSlideIndex] = useState(1); // Store the actual index of image in row
+const ImageSlide = (props) => {
+  const [images, setImages] = useState([]);
+  const [slideIndex, setSlideIndex] = useState(1);
 
   /* Fetch images from API */
   fetchApi("api/presentation/", setImages, "presentationData");
@@ -25,6 +25,12 @@ const ImageSlide = () => {
 
     return () => clearInterval(intervalId);
   })
+
+  if (images){
+    setTimeout(() => {
+      props.setIsImages(true);
+    }, 2500)
+  }
 
   return (
     <div className="container-slider">

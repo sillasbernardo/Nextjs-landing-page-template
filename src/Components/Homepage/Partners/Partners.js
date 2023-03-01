@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 
 import './Partners.scss';
-import CloseButton from '../../Utils/CloseButton';
 import { MobileViewContext } from '../../Context/MobileViewContext';
 import { fetchApi } from '../../Utils/fetchApi';
 
@@ -20,8 +19,6 @@ const PartnerItem = (props) => {
 
 const Partners = React.forwardRef((props, ref) => {
 
-  const isMobile = useContext(MobileViewContext)
-
   const [apiData, setApiData] = useState();
 
   fetchApi("api/partners", setApiData, "partnersData")
@@ -32,7 +29,6 @@ const Partners = React.forwardRef((props, ref) => {
         Nós trabalhamos com os melhores
         <span className="partners-title-highlight">parceiros</span>
       </span>
-      {/* {isMobile && <CloseButton onClose={props.onClose} />} */}
 			{apiData && <div className='partners-bottom'>
 				<div className="partners-list">
 					{apiData.map((partner, index) => {

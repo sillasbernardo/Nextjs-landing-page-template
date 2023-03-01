@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHome } from '@fortawesome/free-solid-svg-icons';
 import { CSSTransition } from 'react-transition-group';
@@ -49,7 +49,7 @@ const Header = () => {
             )}
             <span className="gallery-header-title">Galeria de fotos</span>
             <Link to={`/`}>
-              <CloseButton className="gallery-close-btn" />            
+              <CloseButton className="gallery-close-btn" />
             </Link>
           </div>
         </div>
@@ -61,11 +61,13 @@ const Header = () => {
         <img src={logo} width="100" alt="img" />
         <span className="gallery-header-title">Galeria de fotos</span>
         <div className="gallery-header-navbar">
-          <NavbarItem
-            className="gallery-navbar-item"
-            iconName={faHome}
-            navItemTitle="Home"
-          />
+          <Link className='header-home-link' to={"/"}>
+            <NavbarItem
+              className="gallery-navbar-item"
+              iconName={faHome}
+              navItemTitle="Home"
+            />
+          </Link>
           <CallToAction />
         </div>
       </div>

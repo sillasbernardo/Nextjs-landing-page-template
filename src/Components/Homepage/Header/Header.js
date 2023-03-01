@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
@@ -11,13 +11,12 @@ import logo from "../../../Assets/Img/logo.gif"
 
 const Header = forwardRef((props, ref) => {
   /*
-   * This context makes all mobile rendering in Header when set to true
+   * Define how the component will render based on the device type
    */
   const isMobile = useContext(MobileViewContext);
 
   /*
-   * This state is used to render the mobile navbar since the desktop navbar component
-   * is different from the mobile's
+    * Render a mobile navbar version if device is mobile.
    */
   const [isMobileNavbar, setIsMobileNavbar] = useState(false);
 
@@ -28,8 +27,11 @@ const Header = forwardRef((props, ref) => {
   };
 
   /*
-   * the onCloseBtn useState is used by ClosePageContext to broadcast to all Header's children
-   * it will be true when a close button is clicked in any page.
+    * This context handles when user click in the close button from any page.
+    *
+    * Since many pages have a close button (mobile version only), and closing this button
+    * change some states in the app. This context is used by other components to know how to
+    * behave when the close button is clicked.
    */
   const [onCloseBtn, setOnCloseBtn] = useState(false);
 
