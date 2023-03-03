@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useEffect } from "react";
-
 /* 
 	* This files handles all the fetchings of this project.
 	* It is called by every component that needs to load
@@ -15,13 +12,21 @@ import { useEffect } from "react";
 	* access a different property in the result data.
 	* Eg: "api.data.example or api.data['example']"
  */
+
+import axios from "axios";
+import { useEffect } from "react";
+import * as dotenv from "dotenv";
+
 export const fetchApi = (path, setData, loader) => {
+	dotenv.config({path: '../.env'});
 
 	useEffect(() => {
+		console.log(process.env.REACT_APP_API_KEY)
+
 		const loadData = async () => {
-			const api = await axios.get(`${path}`, {
+			const api = await axios.get(process.env.REACT_APP_API_PATH, {
 				headers: {
-					Authorization: process.env.REACT_APP_API_KEY
+				Authorization: process.env.REACT_APP_API_KEY
 				}
 			})
 			setData(api.data[loader])

@@ -1,3 +1,8 @@
+/* 
+	Reads the "data.json" file from "data" folder and
+	return a promise 
+*/
+
 const fs = require('fs');
 
 const readJsonFile = (property) => {
