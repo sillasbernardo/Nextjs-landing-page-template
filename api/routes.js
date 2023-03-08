@@ -7,17 +7,13 @@ const { loadGoogleDriveData, loadSubfolders } = require('./googleDriveApi');
 const mammoth = require('mammoth');
 const axios = require('axios');
 
+// controllers
+const auth = require('./controllers/connect_auth');
+
 const router = express.Router();
 
 /* Authorization */
-router.get('*', (req, res, next) => {
-  const { authorization } = req.headers;
-  if (authorization === process.env.REACT_APP_API_KEY) {
-    next();
-  } else {
-    res.status(401).json({ message: 'Unauthorized' });
-  }
-});
+router.get('*', auth.connect_auth);
 
 // logo endpoint
 router.get('/api/logo', async (req, res, next) => {
