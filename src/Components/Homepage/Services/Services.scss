@@ -1,116 +1,8 @@
 .services-container {
   position: relative;
   top: 494px;
-  background-color: #151515;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-
-  .services-title-container {
-    margin: 20px 0;
-
-    #services-title {
-      font-size: 28pt;
-      font-weight: bold;
-
-      #services-title-yellow {
-        color: #fbbc05;
-      }
-
-      #services-title-yellow:hover {
-        color: white;
-        cursor: pointer;
-      }
-    }
-  }
-
-  .services-items-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 500px;
-    justify-content: center;
-
-    .items-list-service {
-      margin: 30px;
-      display: inherit;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-
-      .gallery-view-transition-enter {
-        opacity: 0;
-      }
-
-      .gallery-view-transition-enter-active {
-        opacity: 1;
-        transition: opacity 500ms ease-in-out;
-      }
-
-      .gallery-view-transition-exit {
-        opacity: 1;
-      }
-
-      .gallery-view-transition-exit-active {
-        opacity: 0;
-        transition: opacity 500ms ease-in-out;
-      }
-
-      .circle-image {
-        width: 150px;
-
-        .gallery-circle {
-          width: 160px;
-          height: 160px;
-          border-radius: 50%;
-          position: absolute;
-          background-color: rgba($color: #000000, $alpha: 0.7);
-
-          .gallery-link {
-            position: inherit;
-						text-decoration: none;
-						color: white;
-            top: 43%;
-            left: 18%;
-            font-size: 16pt;
-            font-weight: bold;
-          }
-        }
-
-        img {
-          width: inherit;
-          border-radius: 50%;
-          border: 5px solid #fbbc05;
-        }
-      }
-
-      .service-title {
-        margin: 5px 0;
-        color: #fbbc05;
-        width: 100px;
-        text-align: center;
-        font-weight: bold;
-      }
-    }
-
-    .see-gallery-button {
-      background-color: #fbbc05;
-      width: 100px;
-      height: 30px;
-      border-style: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .see-gallery-button:hover {
-      background-color: #000000;
-      color: #fbbc05;
-    }
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 @media screen and (max-width: 800px) {
@@ -118,6 +10,10 @@
     z-index: 101;
     top: 0;
     min-height: 100vh;
+    width: 100vw;
+    color: white;
+    background-color: #151515;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:flex-start;

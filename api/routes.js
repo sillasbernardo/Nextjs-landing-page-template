@@ -25,7 +25,9 @@ router.get('/api/logo', async (req, res, next) => {
     const logoData = await loadGoogleDriveData('logo');
     res.json({ logoData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -35,7 +37,9 @@ router.get('/api/calltoaction', async (req, res, next) => {
     const calltoactionData = await readJsonFile('calltoaction');
     res.json({ calltoactionData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -45,7 +49,9 @@ router.get('/api/presentation', async (req, res, next) => {
     const presentationData = await loadGoogleDriveData('presentation');
     res.json({ presentationData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -55,7 +61,9 @@ router.get('/api/reviews', async (req, res, next) => {
     const reviewsData = await loadGoogleDriveData('reviews');
     res.json({ reviewsData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -81,7 +89,9 @@ router.get('/api/about', async (req, res, next) => {
             );
           })
           .catch((error) => {
-            res.status(500).send(`Could not download file from server. Error: ${error}`);
+            res
+              .status(500)
+              .send(`Could not download file from server. Error: ${error}`);
           });
       }
     });
@@ -102,7 +112,9 @@ router.get('/api/about', async (req, res, next) => {
         res.status(500).send(`Could not convert file to json. Error: ${error}`);
       });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -113,7 +125,9 @@ router.get('/api/awards', async (req, res, next) => {
     res.json({ awardsData });
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -131,7 +145,9 @@ router.get('/api/services', async (req, res, next) => {
     });
     res.json({ servicesData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -152,7 +168,9 @@ router.get('/api/partners', async (req, res, next) => {
 
     res.json({ partnersData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -162,7 +180,9 @@ router.get('/api/contact', async (req, res, next) => {
     const contactData = await readJsonFile('contact');
     res.json({ contactData });
   } catch (error) {
-    res.status(500).send(`Error while fetching data from database. Error: ${error}`);
+    res
+      .status(500)
+      .send(`Error while fetching data from database. Error: ${error}`);
   }
 });
 
@@ -172,14 +192,14 @@ router.get('/api/contact', async (req, res, next) => {
 router.get('/api/gallery/categories', async (req, res, next) => {
   try {
     const services = await loadGoogleDriveData('services');
-    
+
     // Remove extension from name
     const categoriesData = services.map((service) => {
       return service.name.replace('.jpg', '');
     });
 
     // Insert "Todos" in fist position of the array before resolving
-    categoriesData.unshift("Todos")
+    categoriesData.unshift('Todos');
     res.json({ categoriesData });
   } catch (error) {
     res.status(500).send(`Internal server error. Error: ${error}`);
@@ -191,32 +211,31 @@ router.get('/api/gallery/categories/:cid', async (req, res, next) => {});
 
 // All images endpoint
 router.get('/api/gallery/images', async (req, res, next) => {
-
   try {
     // Load all categories existing
     const getAllCategories = await loadSubfolders('categories');
 
-    // Returns a promise from all images in all categories
-    const getAllImages = getAllCategories.map((category) => {
-      const getData = loadGoogleDriveData(category.name);
-      return getData.then(result => result);
-    });
+    const images = [];
 
-    // Send a json response containing the images when promise is resolved
-    Promise.all(getAllImages).then(imagesArray => {
-      let images = [];
+    await Promise.all(getAllCategories.map(async (category) => {
+      try {
+        const getImages = await loadGoogleDriveData(category.name);
+        images.push(...getImages)        
+      } catch (error) {
+        res.status(500).json(`Error while fetching images from loadGoogleDriveData.`)
+      }
+    }))
 
-      // imagesArray return two arrays of images
-      imagesArray.forEach(img => images.push(...img));
-
-      // Shuffle the array
-      for (let i = images.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i - 1));
-        [images[i], images[j]] = [images[j], images[i]];
+    if (images){
+      let imagesLength = images.length;
+      while(--imagesLength > 0){
+        const randomNumber = Math.floor(Math.random() * (imagesLength + 1));
+        images[randomNumber] = images[imagesLength];
+        images[imagesLength] = images[randomNumber];
       }
 
       res.json({ images })
-    })
+    }
   } catch (error) {
     res
       .status(500)

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 	module: {
@@ -40,7 +41,8 @@ module.exports = {
 			template: "./index.html",
 			filename: "index.html"
 		}),
-		new NodePolyfillPlugin()
+		new NodePolyfillPlugin(),
+		new Dotenv()
 	],
 	optimization: {
 		minimize: true,

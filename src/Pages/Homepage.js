@@ -46,7 +46,7 @@ const Homepage = () => {
 	}, [headerRef, reviewRef, aboutRef, servicesRef, partnersRef])
 
 	return (
-		<div id="homepage-container">
+		<div className="homepage-container">
 			<ScrollUp onClickHandler={() => onPagesHandler("header")} />
 			<Header ref={headerRef} onScrollClick={onPagesHandler} />
 			<Presentation />

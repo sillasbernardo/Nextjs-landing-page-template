@@ -1,35 +1,55 @@
-.calltoaction-container{
-	background-color: #FBBC05;
-	padding: 1rem;
-	width: 150px;
-	height: 45px;
-	border-radius: 30px;
-	cursor: pointer;
+.calltoaction-container {
+  background-color: #fbbc05;
+  padding: 1rem;
+  width: fit-content;
+  height: 45px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
 
-	#calltoaction-title{
-		font-size: 11pt;
-	}
+  .calltoaction-leftside {
+    #calltoaction-title {
+      font-size: 11pt;
+      cursor: default;
+    }
 
-	.calltoaction-number{
-		font-weight: bold;
+    .calltoaction-number {
+      font-weight: bold;
+      cursor: pointer;
 
-		span{
-			margin-left: .5rem;
-			font-size: 12pt;
-		}
-	}
+      span {
+        margin-left: 0.5rem;
+        font-size: 12pt;
+      }
+    }
+  }
+
+  .calltoaction-blankline {
+    width: 2px;
+    height: 100%;
+    margin: 0 15px;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
+
+  .calltoaction-insta {
+    cursor: pointer;
+  }
 }
 
 @media screen and (max-width: 800px) {
-	.calltoaction-container{
-		max-width: 150px;
-		margin-right: 5%;
-		padding: 1rem .4rem;
+  .calltoaction-container {
+    width: 150px;
+    height: fit-content;
+    margin-right: 5%;
+    padding: 1rem 0.4rem;
+    flex-direction: column;
 
-		.calltoaction-number{
-			span{
-				font-size: 10pt;
-			}
-		}
-	}
+    .calltoaction-leftside {
+      .calltoaction-number {
+        span {
+          font-size: 10pt;
+        }
+      }
+    }
+  }
 }

@@ -5,6 +5,7 @@ import logo from '../../../Assets/Img/logo.png';
 import { MobileViewContext } from '../../Context/MobileViewContext';
 import CloseButton from '../../Utils/CloseButton';
 import { fetchApi } from '../../Utils/fetchApi';
+import LoadingScreen from "../../Utils/LoadingScreen";
 
 const SocialMediaItem = (props) => {
   return (
@@ -27,27 +28,30 @@ const Contact = (props) => {
   fetchApi('api/contact', setApiData, 'contactData');
 
   return (
-    <div className="contact-container">
-      {isMobile && <CloseButton onClose={props.onClose} />}
+    <>
+      {isMobile && <LoadingScreen timeout={1000} styles={{backgroundColor: "#131313"}} spinnerColor="#fff" />}
+      <div className="contact-container">
+        {isMobile && <CloseButton onClose={props.onClose} />}
         <span className="contact-title">
           Entre em <span className="contact-title-yellow">contato</span>
         </span>
-      <div className="contact-left">
-        <img className="contact-left-logo" src={logo} alt="img" />
-        <div className="contact-info">
-          {apiData &&
-            apiData.map((socialMedia, index) => {
-              return (
-                <SocialMediaItem
-                  key={index}
-                  image={socialMedia.icon}
-                  info={socialMedia.info}
-                />
-              );
-            })}
+        <div className="contact-left">
+          <img className="contact-left-logo" src={logo} alt="img" />
+          <div className="contact-info">
+            {apiData &&
+              apiData.map((socialMedia, index) => {
+                return (
+                  <SocialMediaItem
+                    key={index}
+                    image={socialMedia.icon}
+                    info={socialMedia.info}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

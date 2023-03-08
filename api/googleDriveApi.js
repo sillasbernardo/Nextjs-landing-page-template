@@ -7,8 +7,6 @@ const jwtClientHandler = () => {
 
 	const privatekey = JSON.parse(process.env.PRIVATE_KEY);
 
-	console.log(privatekey)
-
 	const jwtClient = new google.auth.JWT(
 		privatekey.client_email,
 		null,
@@ -63,8 +61,8 @@ const loadGoogleDriveData = (folder) => {
 					}
 					
 					filesArr.push(filesResult);
-					resolve(filesArr);
 				})
+				resolve(filesArr);
 			})
 		})
 

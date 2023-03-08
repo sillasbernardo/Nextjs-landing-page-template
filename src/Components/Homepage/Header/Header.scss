@@ -6,12 +6,18 @@
 	height: 120px;
 	padding: 0 2rem;
 
+	.header-icons{
+		display: flex;
+		align-items: center;
 
-	#header-bars-icon{
-		color: white;
-		font-size: 20pt;
-		cursor: pointer;
+		#header-bars-icon{
+			color: white;
+			font-size: 20pt;
+			cursor: pointer;
+		}
 	}
+
+
 }
 
 @media screen and (max-width: 800px) {

@@ -1,113 +1,46 @@
 import React, { useContext, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
 
 import './Services.scss';
 import { MobileViewContext } from '../../Context/MobileViewContext';
-import CloseButton from '../../Utils/CloseButton';
+import ServiceSection from './ServiceSection';
 import { fetchApi } from '../../Utils/fetchApi';
-import LoadingScreen from '../../Utils/LoadingScreen';
-import { Link } from 'react-router-dom';
-import { GalleryCategoryContext } from '../../Context/GalleryCategoryContext';
-
-const GalleryViewItem = (props) => {
-  const [isGalleryView, setIsGalleryView] = useState(false);
-
-  const showGalleryHandler = (action, element) => {
-    if (element) {
-      action === 'over' ? setIsGalleryView(true) : setIsGalleryView(false);
-    }
-  };
-
-  const [galleryCategory, setGalleryCategory] = useContext(
-    GalleryCategoryContext
-  );
-
-  return (
-    <div className="items-list-service">
-      <div
-        onMouseEnter={(element) => showGalleryHandler('over', element)}
-        onMouseLeave={(element) => showGalleryHandler('out', element)}
-        className="circle-image"
-      >
-        <CSSTransition
-          in={isGalleryView}
-          timeout={500}
-          mountOnEnter
-          unmountOnExit
-          classNames="gallery-view-transition"
-        >
-          <>
-            {isGalleryView && !props.isMobile && (
-              <div className="gallery-circle">
-                <Link
-                  onClick={() => {
-                    setGalleryCategory(props.title);
-                    document.body.style.overflow = 'auto';
-                  }}
-                  className="gallery-link"
-                  to={`/gallery`}
-                >
-                  <span>Ver galeria</span>
-                </Link>
-              </div>
-            )}
-          </>
-        </CSSTransition>
-        <img src={props.image} alt="img" />
-      </div>
-      <span className="service-title">{props.title}</span>
-      {props.isMobile && (
-        <Link
-          onClick={() => {
-            setGalleryCategory(props.title);
-            document.body.style.overflow = 'auto';
-          }}
-          className="gallery-link-button"
-          to={`/gallery`}
-        >
-          <button className="see-gallery-button">Ver galeria</button>
-        </Link>
-      )}
-    </div>
-  );
-};
+import CloseButton from '../../Utils/CloseButton';
 
 const Services = React.forwardRef((props, ref) => {
+  /* Render pages based on device type */
   const isMobile = useContext(MobileViewContext);
 
+  /* Fetch data from API */
   const [apiData, setApiData] = useState();
-
   fetchApi('api/services', setApiData, 'servicesData');
 
-  if (isMobile && !apiData) {
-    return <LoadingScreen className="services-bg-color" spinnerColor="#fff" />;
-  }
-
   return (
-    <>
+    <div ref={ref} className="services-container">
+      {isMobile && <CloseButton onClose={props.onClose} />}
       {apiData && (
-        <div ref={ref} className="services-container">
-          <div className="services-title-container">
-            <span id="services-title">
-              Nossos <span id="services-title-yellow">serviços</span>
-            </span>
-            {isMobile && <CloseButton onClose={props.onClose} />}
-          </div>
-          <div className="services-items-list">
-            {apiData.map((service, index) => {
-              return (
-                <GalleryViewItem
-                  key={index}
-                  image={service.link}
-                  title={service.name}
-                  isMobile={isMobile}
-                />
-              );
-            })}
-          </div>
-        </div>
+        <ServiceSection
+          styles={{
+            gridColumn: '1 / span 2',
+            backgroundColor: '#151515',
+            color: 'white',
+          }}
+          apiData={apiData.filter((data) => data.name !== 'Ações')}
+          title="Nossos Serviços"
+        />
       )}
-    </>
+      {apiData && (
+        <ServiceSection
+          styles={{
+            gridColumn: '3',
+            backgroundColor: '#0a8f08',
+            color: 'white',
+          }}
+          gridColumn="3"
+          apiData={apiData.filter((data) => data.name === 'Ações')}
+          title="Nossas Ações"
+        />
+      )}
+    </div>
   );
 });
 

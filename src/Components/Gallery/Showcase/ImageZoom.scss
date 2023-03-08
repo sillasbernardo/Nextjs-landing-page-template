@@ -1,0 +1,25 @@
+.imagezoom-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow-y: none;
+
+	.imagezoom-img{
+		max-width: 500px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 105;
+	}
+}
+
+.imagezoom-backdrop{
+	background-color: rgba($color: #000000, $alpha: 0.7);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 104;
+}

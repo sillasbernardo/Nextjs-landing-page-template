@@ -1,10 +1,28 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState, useReducer } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import ShowcaseItem from './ShowcaseItem';
 import ShowcasePaginate from './ShowcasePaginate';
 import './Showcase.scss';
 import { fetchApi } from '../../Utils/fetchApi';
 import { GalleryCategoryContext } from '../../Context/GalleryCategoryContext';
+import { PaginateHandler } from './PaginateHandler';
+import ImageZoom from './ImageZoom';
+
+const viewImageReducer = (state, action) => {
+  switch (action.type) {
+    case 'VIEW':
+      return {
+        viewImage: true,
+        imageSrc: action.link,
+      };
+    case 'HIDE':
+      return {
+        viewImage: false,
+        imageSrc: action.link,
+      };
+  }
+};
 
 const Showcase = () => {
   /* fetch images from API */
@@ -12,7 +30,9 @@ const Showcase = () => {
   fetchApi('api/gallery/images', setApiData, 'images');
   let items = [];
 
-  const [galleryCategory, setGalleryCategory] = useContext(GalleryCategoryContext);
+  const [galleryCategory, setGalleryCategory] = useContext(
+    GalleryCategoryContext
+  );
 
   /* Filter data returning the image link and category */
   if (apiData) {
@@ -27,12 +47,12 @@ const Showcase = () => {
       };
       changeName();
 
-      if (galleryCategory !== "Todos" && galleryCategory === categoryName){
+      if (galleryCategory !== 'Todos' && galleryCategory === categoryName) {
         items.push({
           link: data.link,
           category: categoryName,
         });
-      } else if (galleryCategory === "Todos") {
+      } else if (galleryCategory === 'Todos') {
         items.push({
           link: data.link,
           category: categoryName,
@@ -43,32 +63,45 @@ const Showcase = () => {
     });
   }
 
-  if (galleryCategory === 'Todos' && apiData) {
-
-  }
-
   /* Handles paginatation */
-  let itemsPerPage = 16;
+  const {
+    showcaseRef,
+    currentItems,
+    pageCount,
+    selectedPage,
+    handlePageClick,
+  } = PaginateHandler(items);
 
-  const showcaseRef = useRef(null);
+  /* useReducer to handle a click in image to zoom in */
+  const [viewImageState, viewImageDispatch] = useReducer(viewImageReducer, {
+    viewImage: false,
+    imageSrc: '',
+  });
 
-  /* Syncronizes the page with another ShowcasePaginate */
-  const [selectedPage, setSelectedPage] = useState(0);
-
-  const [itemOffset, setItemOffset] = useState(0);
-
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = items && items.slice(itemOffset, endOffset);
-  const pageCount = items && Math.ceil(items.length / itemsPerPage);
-  const handlePageClick = (event) => {
-    showcaseRef.current.scrollIntoView({ behavior: 'smooth' });
-    setSelectedPage(event.selected);
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    setItemOffset(newOffset);
+  const viewImageHandler = (option, link) => {
+    option === 'view'
+      ? viewImageDispatch({ type: 'VIEW', link })
+      : viewImageDispatch({ type: 'HIDE', link });
   };
 
   return (
     <div className="showcase-container" ref={showcaseRef}>
+      <CSSTransition
+        timeout={500}
+        in={viewImageState.viewImage}
+        unmountOnExit
+        mountOnEnter
+        classNames={'view-photo-transition'}
+      >
+        <>
+          {viewImageState.viewImage && (
+            <ImageZoom
+              hideImage={viewImageHandler}
+              image={viewImageState.imageSrc}
+            />
+          )}
+        </>
+      </CSSTransition>
       {currentItems && (
         <>
           <ShowcasePaginate
@@ -83,36 +116,36 @@ const Showcase = () => {
             <ShowcaseItem
               type="image"
               className="image-grid-increase"
+              viewImage={viewImageHandler}
               items={currentItems.slice(0, 1)}
             />
-            <ShowcaseItem type="image" items={currentItems.slice(1, 5)} />
-            {currentItems.length > 4 && (
-              <ShowcaseItem
-                type="text"
-                textMessage="Frase de casamento"
-                className="fancy-text"
-              />
-            )}
             <ShowcaseItem
+              viewImage={viewImageHandler}
+              type="image"
+              items={currentItems.slice(1, 5)}
+            />
+            <ShowcaseItem
+              viewImage={viewImageHandler}
               type="image"
               className="image-grid-increase"
               items={currentItems.slice(5, 6)}
             />
-            <ShowcaseItem type="image" items={currentItems.slice(6, 8)} />
             <ShowcaseItem
+              viewImage={viewImageHandler}
+              type="image"
+              items={currentItems.slice(6, 8)}
+            />
+            <ShowcaseItem
+              viewImage={viewImageHandler}
               type="image"
               className="image-grid-increase"
               items={currentItems.slice(8, 10)}
             />
-            <ShowcaseItem type="image" items={currentItems.slice(10, 12)} />
-            {currentItems.length > 8 && (
-              <ShowcaseItem
-                type="text"
-                textMessage="Frase de casamento 2"
-                className="fancy-text"
-              />
-            )}
-            <ShowcaseItem type="image" items={currentItems.slice(12, 16)} />
+            <ShowcaseItem
+              viewImage={viewImageHandler}
+              type="image"
+              items={currentItems.slice(10, 16)}
+            />
           </div>
           <ShowcasePaginate
             handlePageClick={handlePageClick}

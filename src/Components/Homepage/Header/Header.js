@@ -7,7 +7,7 @@ import { MobileViewContext } from '../../Context/MobileViewContext';
 import { ClosePageContext } from '../../Context/ClosePageContext';
 import Navbar from '../Navbar/Navbar';
 import MobileNavbar from '../Navbar/MobileNavbar';
-import logo from "../../../Assets/Img/logo.gif"
+import logo from '../../../Assets/Img/logo.gif';
 
 const Header = forwardRef((props, ref) => {
   /*
@@ -16,7 +16,7 @@ const Header = forwardRef((props, ref) => {
   const isMobile = useContext(MobileViewContext);
 
   /*
-    * Render a mobile navbar version if device is mobile.
+   * Render a mobile navbar version if device is mobile.
    */
   const [isMobileNavbar, setIsMobileNavbar] = useState(false);
 
@@ -27,28 +27,26 @@ const Header = forwardRef((props, ref) => {
   };
 
   /*
-    * This context handles when user click in the close button from any page.
-    *
-    * Since many pages have a close button (mobile version only), and closing this button
-    * change some states in the app. This context is used by other components to know how to
-    * behave when the close button is clicked.
+   * This context handles when user click in the close button from any page.
+   *
+   * Since many pages have a close button (mobile version only), and closing this button
+   * change some states in the app. This context is used by other components to know how to
+   * behave when the close button is clicked.
    */
   const [onCloseBtn, setOnCloseBtn] = useState(false);
 
   return (
     <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
       <div ref={ref} id={'header-container'}>
-        <img
-          src={logo}
-          alt="logo"
-          width="100"
-        />
+        <img src={logo} alt="logo" width="100" />
         {isMobile ? (
-          <FontAwesomeIcon
-            onClick={() => mobileNavbarHandler(true)}
-            id="header-bars-icon"
-            icon={solid('bars')}
-          />
+          <div className='header-icons'>
+            <FontAwesomeIcon
+              onClick={() => mobileNavbarHandler(true)}
+              id="header-bars-icon"
+              icon={solid('bars')}
+            />
+          </div>
         ) : (
           <Navbar onScrollClick={props.onScrollClick} />
         )}

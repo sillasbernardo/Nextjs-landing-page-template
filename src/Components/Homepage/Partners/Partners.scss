@@ -8,12 +8,14 @@
     rgba(255, 255, 255, 1)
   );
   padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .partners-title {
     display: inline-block;
     font-size: 28pt;
     font-weight: bold;
-    width: 400px;
     margin-left: 40px;
 
     .partners-title-highlight {

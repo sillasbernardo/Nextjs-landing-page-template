@@ -13,9 +13,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(cors({
-	methods: ['GET'],
-	allowedHeaders: ['Content-Type', 'Authorization'],
-	credentials: true
+	origin: "http://localhost:8080",
+	methods: 'GET'
 }));
 
 /* Load routes for incoming requests */
