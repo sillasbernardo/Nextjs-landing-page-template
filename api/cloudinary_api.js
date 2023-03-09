@@ -10,20 +10,19 @@ const dotenv = require('dotenv').config({ path: '../.env' });
 
 // Authentication
 cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
-	secure: true
-})
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 const searchImages = () => {
-	cloudinary.search
-		.expression('Presentation')
-		.sort_by('public_id', 'desc')
-		.execute()
-		.then(result => {
-			console.log(result)
-		})
-}
+  // Fetch images based on key/value pair
+  cloudinary.api
+    .resources({ type: 'upload', tag: 'Presentation-slides' })
+    .then((result) => {
+      console.log(result);
+    });
+};
 
-searchImages()
+searchImages();
