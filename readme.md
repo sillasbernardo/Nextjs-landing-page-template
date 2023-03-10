@@ -1,7 +1,10 @@
 # Reactjs Website Project
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9e31afc34e733c5113e95e7119454d9ddb333d8a
 ## Overview
 
 This is a freelancing website model which was primarily designed for a client operating in event planning industry, with a particular focus on providing high-quality lighting services.
@@ -12,12 +15,15 @@ In the following sections, I`ll dive deeper into the features and functionalitie
 
 ## Gallery
 
+<<<<<<< HEAD
 ## Navigation
 
 The website consists of two pages: the **homepage** and the **gallery**. The **homepage** serves as a landing page that provides brief information about the client's services, including awards, reviews, partners, and contact details. To access the **gallery**, users must click on one of the available service options, which will redirect them to a page where they can view photos related to that service.
 
 For mobile users, certain sections of the landing page are hidden and can only be accessed by using the dropdown menu.
 
+=======
+>>>>>>> 9e31afc34e733c5113e95e7119454d9ddb333d8a
 ## Getting Started
 
 ### Must know
@@ -68,6 +74,24 @@ gnome-terminal --working-directory="./api" -- npm start
 npm start
 ```
 
+<<<<<<< HEAD
 # License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+=======
+## Developer Documentation
+
+### [Frontend](documentation/frontend/frontend.md)
+
+
+
+4.	Backend Documentation: This section should include documentation on the backend of the website, including the Nodejs server, its API endpoints, and how they are structured. It should also include information on the database schema and how it is organized.
+
+5.	Deployment: This section should include instructions on how to deploy the website to a production environment, including any configuration settings that need to be set up.
+
+6.	Testing: This section should include information on how to test the website, including any automated testing frameworks used, and how to run tests locally and on a production environment.
+
+7.	Troubleshooting: This section should include common issues that users may encounter when using the website, along with steps to resolve them.
+
+8.	Conclusion: Summarize the key points of the documentation and provide any additional resources or information that users may find useful.
+>>>>>>> 9e31afc34e733c5113e95e7119454d9ddb333d8a

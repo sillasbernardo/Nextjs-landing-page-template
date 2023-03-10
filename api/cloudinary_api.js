@@ -16,6 +16,7 @@ cloudinary.config({
   secure: true,
 });
 
+<<<<<<< HEAD
 const searchImages = async (tagname) => {
   // Fetch images based on key/value pair
   try {
@@ -43,3 +44,15 @@ const searchImages = async (tagname) => {
 };
 
 exports.searchImages = searchImages;
+=======
+const searchImages = () => {
+  // Fetch images based on key/value pair
+  cloudinary.api
+    .resources({ type: 'upload', tag: 'Presentation-slides' })
+    .then((result) => {
+      console.log(result);
+    });
+};
+
+searchImages();
+>>>>>>> 9e31afc34e733c5113e95e7119454d9ddb333d8a
