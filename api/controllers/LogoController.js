@@ -3,8 +3,8 @@ const cloudinaryApi = require('../cloudinary_api');
 
 const getLogo = async (req, res, next) => {
 	try {
-    const logoData = await cloudinaryApi.searchImages('Logo');
-		console.log(logoData)
+    let logoData = await cloudinaryApi.searchImages('Logo')
+    logoData = await cloudinaryApi.optimizeImages(logoData)
     res.json({ logoData });
   } catch (error) {
     res
@@ -13,4 +13,4 @@ const getLogo = async (req, res, next) => {
   }
 }
 
-exports.getLogo = getLogo;
+module.exports = getLogo;

@@ -37,13 +37,15 @@ const Header = forwardRef((props, ref) => {
   const [onCloseBtn, setOnCloseBtn] = useState(false);
 
   const [apiData, setApiData] = useState();
-  fetchApi('/api/logo', setApiData, 'logoData')
+  fetchApi('api/logo', setApiData, 'logoData')
   console.log(apiData)
 
   return (
     <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
       <div ref={ref} id={'header-container'}>
-        {apiData && <img src={apiData.link} alt="logo" width="100" />}
+        <div>
+          {apiData && <img src={apiData[0].link} alt="logo" width="100" />}
+        </div>
         {isMobile ? (
           <div className='header-icons'>
             <FontAwesomeIcon

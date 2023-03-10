@@ -13,7 +13,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(cors({
-	origin: "http://localhost:8080",
+	origin:	["http://localhost:8080", "http://10.10.0.250:8080"],
 	methods: 'GET'
 }));
 
