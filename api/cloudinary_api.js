@@ -6,24 +6,40 @@
 const cloudinary = require('cloudinary').v2;
 
 // temp
-const dotenv = require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: '../.env' });
 
 // Authentication
 cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
-	secure: true
-})
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
-const searchImages = () => {
-	cloudinary.search
-		.expression('Presentation')
-		.sort_by('public_id', 'desc')
-		.execute()
-		.then(result => {
-			console.log(result)
-		})
-}
+const searchImages = async (tagname) => {
+  // Fetch images based on key/value pair
+  try {
+    cloudinary
+      .search
+      .expression(`resource_type:image AND tags=${tagname}`)
+      .execute()
+      .then(result => {
+        let images = [];
 
-searchImages()
+        let resArray = result.resources;
+        resArray.map(data => {
+          const dataObj = {
+            name: data.filename,
+            link: data.url,
+            category: data.folder.split("/").pop()
+          }
+          images.push(dataObj);
+          return images;
+        })
+      })
+  } catch (error) {
+    return new Error(error)
+  }
+};
+
+exports.searchImages = searchImages;

@@ -8,6 +8,7 @@ import { ClosePageContext } from '../../Context/ClosePageContext';
 import Navbar from '../Navbar/Navbar';
 import MobileNavbar from '../Navbar/MobileNavbar';
 import logo from '../../../Assets/Img/logo.gif';
+import { fetchApi } from '../../Utils/fetchApi';
 
 const Header = forwardRef((props, ref) => {
   /*
@@ -35,10 +36,14 @@ const Header = forwardRef((props, ref) => {
    */
   const [onCloseBtn, setOnCloseBtn] = useState(false);
 
+  const [apiData, setApiData] = useState();
+  fetchApi('/api/logo', setApiData, 'logoData')
+  console.log(apiData)
+
   return (
     <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
       <div ref={ref} id={'header-container'}>
-        <img src={logo} alt="logo" width="100" />
+        {apiData && <img src={apiData.link} alt="logo" width="100" />}
         {isMobile ? (
           <div className='header-icons'>
             <FontAwesomeIcon

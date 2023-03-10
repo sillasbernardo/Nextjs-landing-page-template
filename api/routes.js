@@ -8,7 +8,8 @@ const mammoth = require('mammoth');
 const axios = require('axios');
 
 // controllers
-const auth = require('./controllers/connect_auth');
+const auth = require('./controllers/ConnectAuth');
+const LogoController = require('./controllers/LogoController');
 
 const router = express.Router();
 
@@ -16,16 +17,7 @@ const router = express.Router();
 router.get('*', auth.connect_auth);
 
 // logo endpoint
-router.get('/api/logo', async (req, res, next) => {
-  try {
-    const logoData = await loadGoogleDriveData('logo');
-    res.json({ logoData });
-  } catch (error) {
-    res
-      .status(500)
-      .send(`Error while fetching data from database. Error: ${error}`);
-  }
-});
+router.get('/api/logo', LogoController.getLogo);
 
 // calltoaction endpoint
 router.get('/api/calltoaction', async (req, res, next) => {

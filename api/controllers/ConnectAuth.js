@@ -1,8 +1,10 @@
+/* All connections pass by this route for authentication. */
+
 const connect_auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (authorization === process.env.REACT_APP_API_KEY) {
-    return next();
+    next();
   } else {
     res.status(401).json({ message: 'Unauthorized' })
   }
