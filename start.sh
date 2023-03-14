@@ -1,3 +1,1 @@
-npm install
-gnome-terminal --working-directory="./api" -- npm start
-npm start
+npm install && gnome-terminal --working-directory="./api" -- npm start && npm start

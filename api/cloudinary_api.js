@@ -5,9 +5,6 @@
 
 const cloudinary = require('cloudinary').v2;
 
-// temp
-require('dotenv').config({ path: '../.env' });
-
 // Authentication
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,43 +13,83 @@ cloudinary.config({
   secure: true,
 });
 
-<<<<<<< HEAD
+// Fetch images from cloudinary based on tagname
 const searchImages = async (tagname) => {
-  // Fetch images based on key/value pair
   try {
-    cloudinary
-      .search
-      .expression(`resource_type:image AND tags=${tagname}`)
-      .execute()
-      .then(result => {
-        let images = [];
+    // Error handling
+    if (!tagname) {
+      return new Error("'tagname' is undefined");
+    }
 
-        let resArray = result.resources;
-        resArray.map(data => {
-          const dataObj = {
-            name: data.filename,
-            link: data.url,
-            category: data.folder.split("/").pop()
-          }
-          images.push(dataObj);
-          return images;
-        })
-      })
+    const result = await cloudinary.search
+      .expression(`resource_type:image AND tags=${tagname}`)
+      .execute();
+
+    const images = result.resources.map((resource) => ({
+      name: resource.filename,
+      publicId: resource.public_id,
+      link: resource.url,
+      category: resource.folder.split('/').pop(),
+    }));
+
+    return images;
   } catch (error) {
-    return new Error(error)
+    return new Error(error);
   }
 };
 
-exports.searchImages = searchImages;
-=======
-const searchImages = () => {
-  // Fetch images based on key/value pair
-  cloudinary.api
-    .resources({ type: 'upload', tag: 'Presentation-slides' })
-    .then((result) => {
-      console.log(result);
+// Resize images
+const resizeImage = async (images, size) => {
+  try {
+    // Error handling
+    if (!images || !size) {
+      return new Error(!images ? 'images is undefined' : 'size is undefined');
+    }
+
+    const reducedImages = images.map((image) => {
+      const url = cloudinary.url(image.publicId, {
+        width: size,
+        crop: 'scale',
+      });
+
+      return {
+        ...image,
+        link: url
+      }
     });
+
+    return reducedImages;
+  } catch (error) {
+    return new Error(error);
+  }
 };
 
-searchImages();
->>>>>>> 9e31afc34e733c5113e95e7119454d9ddb333d8a
+// Optimize images to reduce file size without losing quality
+const optimizeImages = async (images) => {
+  try {
+    if (!images){
+      return new Error('images is undefined')
+    }
+
+    const optimizedImages = images.map((image) => {
+      const url = cloudinary.url(image.publicId, {
+        format: 'gif',
+        flags: 'lossy',
+        quality: 'auto:good'
+      })
+
+      return {
+        ...images,
+        link: url
+      }
+    })
+
+    return optimizedImages
+  } catch (error) {
+    return new Error(error);
+  }
+}
+
+exports.searchImages = searchImages;
+exports.resizeImage = resizeImage;
+exports.optimizeImages = optimizeImages;
