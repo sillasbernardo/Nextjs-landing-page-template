@@ -1,10 +1,12 @@
 {
 	"calltoaction": {
-		"speak-to-us": {
+		"speakToUs": {
 			"phoneNumber": "71 99944-2270",
-			"toLink": "https://google.com"
+			"link": "https://google.com"
 		},
-		"instagram-link": "https://www.instagram.com/gbiluminacoes/"
+		"instagram": {
+			"link": "https://www.instagram.com/gbiluminacoes/"
+		}
 	},
 	"awards": {
 		"quantity": "10",

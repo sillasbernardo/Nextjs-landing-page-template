@@ -1,7 +1,9 @@
 /* --- @Imports --- */
 const express = require('express');
 
-const logoController = require('../controllers/LogoController');
+const logoController = require('../../Shared/Controllers/LogoController');
+const calltoactionController = require('../../Shared/Controllers/CalltoactionController');
+const presentationController = require('../../Homepage/Controllers/PresentationController');
 
 /* --- @code --- */
 const router = express.Router();
@@ -10,28 +12,10 @@ const router = express.Router();
 router.get('/logo', logoController);
 
 // calltoaction endpoint
-router.get('/calltoaction', async (req, res, next) => {
-  try {
-    const calltoactionData = await readJsonFile('calltoaction');
-    res.json({ calltoactionData });
-  } catch (error) {
-    res
-      .status(500)
-      .send(`Error while fetching data from database. Error: ${error}`);
-  }
-});
+router.get('/calltoaction', calltoactionController);
 
 // presentation endpoint
-router.get('/presentation', async (req, res, next) => {
-  try {
-    const presentationData = await loadGoogleDriveData('presentation');
-    res.json({ presentationData });
-  } catch (error) {
-    res
-      .status(500)
-      .send(`Error while fetching data from database. Error: ${error}`);
-  }
-});
+router.get('/presentation', presentationController);
 
 // reviews endpoint
 router.get('/reviews', async (req, res, next) => {
@@ -164,4 +148,6 @@ router.get('/contact', async (req, res, next) => {
   }
 });
 
+
+/* --- @exports --- */
 module.exports = router;
