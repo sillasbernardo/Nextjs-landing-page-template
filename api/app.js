@@ -1,11 +1,14 @@
+/* --- @imports --- */
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const dotenv = require('dotenv').config({ path: '../.env' });
 
-if (dotenv.error) throw dotenv.error;
-
 const routes = require('./routes');
+const apiErrorHandler = require('./Shared/Handlers/ApiErrorHandler')
+
+/* --- @code --- */
+if (dotenv.error) throw dotenv.error;
 
 const app = express();
 
@@ -17,8 +20,12 @@ app.use(cors({
 	methods: 'GET'
 }));
 
-/* Load routes for incoming requests */
+// Load routes for incoming requests
 app.use("/", routes)
 
+// Handle errors
+app.use(apiErrorHandler);
+
+// Run server
 const port = process.env.PORT || 5000;
 app.listen(port, console.log(`App is listening on port ${port}`));

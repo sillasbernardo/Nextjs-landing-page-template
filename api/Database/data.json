@@ -1,14 +1,21 @@
 {
 	"calltoaction": {
-		"speak-to-us": {
+		"speakToUs": {
 			"phoneNumber": "71 99944-2270",
-			"toLink": "https://google.com"
+			"link": "https://google.com"
 		},
-		"instagram-link": "https://www.instagram.com/gbiluminacoes/"
+		"instagram": {
+			"link": "https://www.instagram.com/gbiluminacoes/"
+		}
 	},
 	"awards": {
 		"quantity": "10",
 		"years": "3"
+	},
+	"partners": {
+		"enlacecerimonial": "http://wa.me/+5571996599469",
+		"gmproducoes": "http://wa.me/+5571999243117",
+		"marcialeventos": "http://wa.me/+5571999545972"
 	},
 	"contact": [
 		{
