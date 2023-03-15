@@ -12,7 +12,7 @@ const About = React.forwardRef((props, ref) => {
 
   /* Fetch data from API */
   const [apiData, setApiData] = useState();
-  fetchApi('api/about', setApiData, 'aboutData');
+  fetchApi('api/homepage/about', setApiData, 'aboutData');
 
   /* This fix a bug which the span "Ricardo Bergem" renders before everything else. */
   const [isLoaded, setIsloaded] = useState(false);
@@ -41,7 +41,7 @@ const About = React.forwardRef((props, ref) => {
             <div className="about-image-name">
               <img
                 className="about-image"
-                src={apiData.image[0].link}
+                src={apiData.image}
                 alt="img"
               />
               {isLoaded && <span>Ricardo <span className="ab-img-name-bold">Bergem</span>

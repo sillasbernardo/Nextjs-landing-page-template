@@ -45,6 +45,23 @@ const searchImages = async (tagname) => {
   }
 };
 
+/* 
+	@desc: This function searches for subfolders in a speficic folder
+*/
+const searchFolders = async (folderName) => {
+	try {
+		const folders = await cloudinary.api.sub_folders(folderName, { type: 'upload' })
+			.then(result => result)
+			.catch(error => console.error(error))
+		
+		return folders;
+	} catch (error) {
+		console.error(error);
+		throw ApiError.internal('Something went wrong')
+	}
+}
+
+
 /*
 	@desc: This function transforms images and return the specified type
 					of transformation.
@@ -109,3 +126,4 @@ const transformImages = async (type, ...options) => {
 /* --- @exports --- */
 exports.searchImages = searchImages;
 exports.transformImages = transformImages;
+exports.searchFolders = searchFolders;

@@ -7,7 +7,7 @@ import { MobileViewContext } from '../../Context/MobileViewContext';
 import { ClosePageContext } from '../../Context/ClosePageContext';
 import Navbar from '../Navbar/Navbar';
 import MobileNavbar from '../Navbar/MobileNavbar';
-import logo from '../../../Assets/Img/logo.gif';
+import { fetchApi } from '../../Utils/fetchApi';
 
 const Header = forwardRef((props, ref) => {
   /*
@@ -36,13 +36,13 @@ const Header = forwardRef((props, ref) => {
   const [onCloseBtn, setOnCloseBtn] = useState(false);
 
   const [apiData, setApiData] = useState();
-  fetchApi('/api/logo', setApiData, 'logoData')
-  console.log(apiData)
+  fetchApi('api/homepage/logo', setApiData, 'logoData')
 
   return (
     <ClosePageContext.Provider value={[onCloseBtn, setOnCloseBtn]}>
       <div ref={ref} id={'header-container'}>
-        {apiData && <img src={apiData.link} alt="logo" width="100" />}
+        {apiData && <img src={apiData[0].link} alt="logo" width="100" />}
+        <div></div>
         {isMobile ? (
           <div className='header-icons'>
             <FontAwesomeIcon
@@ -52,7 +52,7 @@ const Header = forwardRef((props, ref) => {
             />
           </div>
         ) : (
-          <Navbar onScrollClick={props.onScrollClick} />
+           <Navbar onScrollClick={props.onScrollClick} />
         )}
         <>
           {isMobileNavbar && isMobile && (

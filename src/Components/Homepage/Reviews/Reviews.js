@@ -10,7 +10,7 @@ const Reviews = React.forwardRef((props, ref) => {
   const imageRef2 = useRef(null);
   const imageRef3 = useRef(null);
 
-  fetchApi("api/reviews", setReviewImages, "reviewsData");
+  fetchApi("api/homepage/reviews", setReviewImages, "reviewsData");
 
   const handleMouseEnter = (element) => {
 		element.current.classList.add('increase');

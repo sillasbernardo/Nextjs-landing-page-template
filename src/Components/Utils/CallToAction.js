@@ -11,20 +11,7 @@ const CallToAction = () => {
 
   /* Store data from API */
   const [apiData, setApiData] = useState();
-  fetchApi('api/calltoaction', setApiData, 'calltoactionData');
-
-  const [socialMediaData, setSocialMediaData] = useState();
-  fetchApi('api/contact', setSocialMediaData, 'contactData');
-
-  let instagramImage;
-
-  if (socialMediaData) {
-    socialMediaData.map((socialMedia) => {
-      if (socialMedia.info === '@gbiluminacoes') {
-        instagramImage = socialMedia.icon;
-      }
-    });
-  }
+  fetchApi('api/homepage/calltoaction', setApiData, 'calltoactionData');
 
   if (apiData) {
     return (
@@ -33,13 +20,13 @@ const CallToAction = () => {
 					<span id="calltoaction-title">Fale conosco</span>
 					<div className="calltoaction-number">
 						<FontAwesomeIcon icon={faHeadset} />
-						<span onClick={() => window.open(apiData.toLink)}>
-							{apiData.phoneNumber}
+						<span onClick={() => window.open(apiData.speakToUs.link)}>
+							{apiData.speakToUs.phoneNumber}
 						</span>
 					</div>					
 				</div>
 				{!isMobile && <div className='calltoaction-blankline'></div>}
-        {!isMobile && <img className='calltoaction-insta' src={instagramImage} alt="img" onClick={() => window.open("https://www.instagram.com/gbiluminacoes/")} />}
+        {!isMobile && <img className='calltoaction-insta' src={apiData.instagram.icon} alt="img" onClick={() => window.open(apiData.instagram.link)} />}
       </div>
     );
   }

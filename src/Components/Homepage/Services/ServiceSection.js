@@ -8,6 +8,7 @@ import './ServiceSection.scss';
 const ServiceSection = (props) => {
   const isMobile = useContext(MobileViewContext);
 
+  // Receives a title prop to dynamically display between "Serviços" and "Ações"
   let title = [];
   if (props.title) {
     title.push(props.title.split(' ').shift());
@@ -29,8 +30,8 @@ const ServiceSection = (props) => {
               return (
                 <GalleryViewItem
                   key={index}
-                  image={service.link}
-                  title={service.name}
+                  image={service.imageLink}
+                  title={service.serviceTitle}
                   isMobile={isMobile}
                 />
               );

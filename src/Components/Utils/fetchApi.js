@@ -16,11 +16,10 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 
-export const fetchApi = (path, setData, loader) => {
-  
+export const fetchApi = (path, setData, loader) => {  
   useEffect(() => {
     const loadData = async () => {
-      const api = await axios.get(process.env.REACT_APP_API_PATH_I + path, {
+      const api = await axios.get(process.env.REACT_APP_API_PATH_L + path, {
         headers: {
           Authorization: process.env.REACT_APP_API_KEY,
         },

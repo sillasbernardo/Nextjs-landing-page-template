@@ -7,7 +7,7 @@ import { fetchApi } from '../../Utils/fetchApi';
 
 const Awards = () => {
   const [apiData, setApiData] = useState();
-  fetchApi("api/awards", setApiData, "awardsData");
+  fetchApi("api/homepage/awards", setApiData, "awardsData");
 
   if (apiData){
     return (

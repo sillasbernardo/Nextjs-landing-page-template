@@ -10,7 +10,7 @@ const ImageSlide = (props) => {
   const [slideIndex, setSlideIndex] = useState(1);
 
   /* Fetch images from API */
-  fetchApi("api/presentation/", setImages, "presentationData");
+  fetchApi("api/homepage/presentation/", setImages, "presentationData");
 
   /* Upload slide image every 'timer' milliseconds */
   const timer = 7000;

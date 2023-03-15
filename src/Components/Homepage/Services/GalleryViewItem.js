@@ -14,9 +14,10 @@ const GalleryViewItem = (props) => {
     }
   };
 
-  const [galleryCategory, setGalleryCategory] = useContext(
-    GalleryCategoryContext
-  );
+  const [galleryCategory, setGalleryCategory] = useContext(GalleryCategoryContext);
+
+
+  /* Todo: setup a fetchApi call to retrieve images for specific category */
 
   return (
     <div className="items-list-service">

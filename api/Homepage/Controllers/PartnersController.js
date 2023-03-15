@@ -8,6 +8,7 @@ const getPartners = async (req, res, next) => {
   try {
     // Fetch images from cloudinary
     let partnersImages = await cloudinaryApi.searchImages('Partners');
+    // Make all images 500x500px
     partnersImages = await cloudinaryApi.transformImages(
       'cropImages',
       partnersImages,
@@ -15,37 +16,35 @@ const getPartners = async (req, res, next) => {
       500,
       'fill'
     );
+    // Optimize images to load faster
     partnersImages = await cloudinaryApi.transformImages(
       'optimizeImages',
       partnersImages,
       'jpg'
     );
 
-			/* 
-				The code below needs to return the correct link from obeject in data.json
+    // Store partners logo and a contacting link
+    let partnersData = [];
 
-				check this bug
-			*/
-
-
-		// Get partner's contact link
+		// Get partners objects from data.json
     const partnersContact = await jsonHandler('partners');
+    // Map through object keys
+    Object.keys(partnersContact).map(nameTag => {
+      // Map through each image to compare image filename to object key
+      partnersImages.map(image => {
+        // Remove characters after '_' in filename
+        const imageFilename = image.name.split('_').shift()
+        // Return contact link only if image filename and object key matches
+        if (imageFilename === nameTag){
+          partnersData.push({
+            partnerLogo: image.link,
+            partnerContactLink: partnersContact[nameTag]
+          })       
+        }
+      })
+    })
 
-		const contactLink = partnersImages.map(contact => {
-			const contactTitle = contact.name.split('_').shift();
-
-			console.log(contactTitle)
-
-			for (const title of Object.keys(partnersContact)){
-				if (title === contactTitle){
-					return Object.values(title)
-				}
-			}
-		})
-
-		console.log(contactLink);
-
-    // res.status(200).json({ partnersData });
+    res.status(200).json({ partnersData });
   } catch (error) {
     console.error(error);
     return next(ApiError.internal('Something went wrong'));

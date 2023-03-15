@@ -12,7 +12,7 @@ const Services = React.forwardRef((props, ref) => {
 
   /* Fetch data from API */
   const [apiData, setApiData] = useState();
-  fetchApi('api/services', setApiData, 'servicesData');
+  fetchApi('api/homepage/services', setApiData, 'servicesData');
 
   return (
     <div ref={ref} className="services-container">
@@ -24,7 +24,7 @@ const Services = React.forwardRef((props, ref) => {
             backgroundColor: '#151515',
             color: 'white',
           }}
-          apiData={apiData.filter((data) => data.name !== 'Ações')}
+          apiData={apiData.filter((data) => data.serviceTitle !== 'Ações')}
           title="Nossos Serviços"
         />
       )}
@@ -36,7 +36,7 @@ const Services = React.forwardRef((props, ref) => {
             color: 'white',
           }}
           gridColumn="3"
-          apiData={apiData.filter((data) => data.name === 'Ações')}
+          apiData={apiData.filter((data) => data.serviceTitle === 'Ações')}
           title="Nossas Ações"
         />
       )}

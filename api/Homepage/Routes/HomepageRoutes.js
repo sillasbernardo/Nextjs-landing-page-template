@@ -9,6 +9,7 @@ const aboutController = require('../../Homepage/Controllers/AboutController');
 const awardsController = require('../../Homepage/Controllers/AwardsController');
 const servicesController = require('../../Homepage/Controllers/ServicesController');
 const partnersController = require('../../Homepage/Controllers/PartnersController');
+const contactController = require('../../Homepage/Controllers/ContactController');
 
 /* --- @code --- */
 const router = express.Router();
@@ -38,16 +39,7 @@ router.get('/services', servicesController);
 router.get('/partners', partnersController);
 
 // Contact endpoint
-router.get('/contact', async (req, res, next) => {
-  try {
-    const contactData = await readJsonFile('contact');
-    res.json({ contactData });
-  } catch (error) {
-    res
-      .status(500)
-      .send(`Error while fetching data from database. Error: ${error}`);
-  }
-});
+router.get('/contact', contactController);
 
 
 /* --- @exports --- */
