@@ -1,8 +1,8 @@
 {
 	"calltoaction": {
 		"speakToUs": {
-			"phoneNumber": "71 99944-2270",
-			"link": "https://google.com"
+			"phoneNumber": "71 99992-4721",
+			"link": "http://wa.me/+5571999924721"
 		},
 		"instagram": {
 			"link": "https://www.instagram.com/gbiluminacoes/"
@@ -24,20 +24,28 @@
 		"marcialeventos": {
 			"name": "Marcial Eventos",
 			"contactLink": "http://wa.me/+5571999545972"
+		},
+		"innoveeventos": {
+			"name": "Innove Eventos",
+			"contactLink": "http://wa.me/+5571999599026"
+		},
+		"plualart": {
+			"name": "Plural Art",
+			"contactLink": "http://wa.me/+5571996468830"
 		}
 	},
 	"contact": {
 		"whatsapp": {
-			"info": "71 00000-0000",
-			"link": "https://google.com"
+			"info": "71 99992-4721",
+			"link": "http://wa.me/+5571999924721"
 		},
 		"instagram": {
 			"info": "@gbiluminacoes",
 			"link": "https://www.instagram.com/gbiluminacoes/"
 		},
 		"gmail": {
-			"info": "gbiluminacoes@gmail.com",
-			"link": "https://google.com"
+			"info": "gbiluminacoes@bol.com.br",
+			"link": "mailto:gbiluminacoes@bol.com.br"
 		},
 		"facebook": {
 			"info": "GB Iluminações",
