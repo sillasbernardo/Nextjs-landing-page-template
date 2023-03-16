@@ -1,15 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import './Partners.scss';
-import { MobileViewContext } from '../../Context/MobileViewContext';
 import { fetchApi } from '../../Utils/fetchApi';
 
 const PartnerItem = (props) => {
   return (
     <div className="partner-item">
-      <img src={props.image} alt="img" />
-      <button className="partner-contact-button">
-        <a href={props.contact}>Entre em contato</a>
+      <div className='partner-item-holder'>
+        <img src={props.image} alt="img" />
+      </div>
+      <span className='partner-item-title'>{props.contact.name}</span>
+      <button onClick={() => window.open(props.contact.contactLink)} className="partner-contact-button">
+        <a>Entre em contato</a>
       </button>
     </div>
   );
@@ -18,7 +20,7 @@ const PartnerItem = (props) => {
 const Partners = React.forwardRef((props, ref) => {
   const [apiData, setApiData] = useState();
 
-  fetchApi('api/partners', setApiData, 'partnersData');
+  fetchApi('api/homepage/partners', setApiData, 'partnersData');
 
   return (
     <>
@@ -34,8 +36,8 @@ const Partners = React.forwardRef((props, ref) => {
                   return (
                     <PartnerItem
                       key={index}
-                      image={partner.imageLink}
-                      contact={partner.partnerLink}
+                      image={partner.partnerLogo}
+                      contact={partner.partnerContactLink}
                     />
                   );
                 })}

@@ -7,11 +7,15 @@ const getCategoryImages = async (req, res, next) => {
 	try {
 		const categoryId = req.params.cid;
 
+		// Get image for watermark
+		let watermark = await cloudinaryApi.searchImages('Logo');
+
 		// Fetch all images in the gallery
 		let imagesData = await cloudinaryApi.searchImages('Gallery');
+		imagesData = await cloudinaryApi.transformImages('optimizeImages', imagesData, 'jpg');
 
 		// Filter images based on categoryId
-		if (categoryId.toLowerCase() !== 'all'){
+		if (categoryId.toLowerCase() !== 'todos'){
 			imagesData = imagesData.filter(image => image.category.toLowerCase() === categoryId.toLowerCase())
 		}
 

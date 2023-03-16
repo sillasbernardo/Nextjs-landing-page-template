@@ -13,15 +13,39 @@
 		"years": "3"
 	},
 	"partners": {
-		"enlacecerimonial": "http://wa.me/+5571996599469",
-		"gmproducoes": "http://wa.me/+5571999243117",
-		"marcialeventos": "http://wa.me/+5571999545972"
+		"enlacecerimonial": {
+			"name": "Enlace Cerimonial",
+			"contactLink": "http://wa.me/+5571996599469"
+		},
+		"gmproducoes": {
+			"name": "GM Produções",
+			"contactLink": "http://wa.me/+5571999243117"
+		},
+		"marcialeventos": {
+			"name": "Marcial Eventos",
+			"contactLink": "http://wa.me/+5571999545972"
+		}
 	},
 	"contact": {
-		"whatsapp": "71 00000-0000",
-		"instagram": "@gbiluminacoes",
-		"gmail": "gbiluminacoes@gmail.com",
-		"facebook": "GB Iluminações",
-		"address": "Rua Manoel Joaquim Borges, Catu, BA - Brasil"
+		"whatsapp": {
+			"info": "71 00000-0000",
+			"link": "https://google.com"
+		},
+		"instagram": {
+			"info": "@gbiluminacoes",
+			"link": "https://www.instagram.com/gbiluminacoes/"
+		},
+		"gmail": {
+			"info": "gbiluminacoes@gmail.com",
+			"link": "https://google.com"
+		},
+		"facebook": {
+			"info": "GB Iluminações",
+			"link": "https://www.facebook.com/profile.php?id=100072146191939"
+		},
+		"address": {
+			"info": "1º Trav. Manoel Joaquim Borges, Catu, BA - Brasil",
+			"link": "https://goo.gl/maps/jfR2TbW62BjKcRwW8"
+		}
 	}
 }

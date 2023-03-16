@@ -25,42 +25,28 @@ const viewImageReducer = (state, action) => {
 };
 
 const Showcase = () => {
-  /* fetch images from API */
-  const [apiData, setApiData] = useState();
-  fetchApi('api/gallery/images', setApiData, 'images');
-  let items = [];
-
+  // this useContext receives the current active category
   const [galleryCategory, setGalleryCategory] = useContext(
     GalleryCategoryContext
-  );
+    );
+
+  /* fetch images from API */
+  const [apiData, setApiData] = useState();
+  fetchApi(`api/gallery/categories/${galleryCategory}`, setApiData, 'imagesData', galleryCategory);
+
+    console.log(apiData)
+
+  // Store images
+  let items = [];
 
   /* Filter data returning the image link and category */
   if (apiData) {
-    apiData.map((data) => {
-      let categoryName;
-
-      // remove "-gallery" from original name and uppercase first letter
-      const changeName = () => {
-        categoryName = data.category.split('-').shift();
-        categoryName =
-          categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-      };
-      changeName();
-
-      if (galleryCategory !== 'Todos' && galleryCategory === categoryName) {
-        items.push({
-          link: data.link,
-          category: categoryName,
-        });
-      } else if (galleryCategory === 'Todos') {
-        items.push({
-          link: data.link,
-          category: categoryName,
-        });
-      } else {
-        return;
-      }
-    });
+    apiData.map(image => {
+      items.push({
+        imageLink: image.link,
+        imageCategory: image.category
+      })
+    })
   }
 
   /* Handles paginatation */

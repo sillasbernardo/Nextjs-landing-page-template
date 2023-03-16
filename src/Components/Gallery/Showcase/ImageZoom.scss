@@ -5,12 +5,14 @@
 	overflow-y: none;
 
 	.imagezoom-img{
-		max-width: 500px;
+		max-width: 600px;
 		position: fixed;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 105;
+		border: 3px solid white;
+		border-radius: 10px;
 	}
 }
 

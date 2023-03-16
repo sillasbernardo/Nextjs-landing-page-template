@@ -10,7 +10,7 @@ const ShowcasePaginate = (props) => {
       breakLabel="..."
       nextLabel="Próximo"
       onPageChange={props.handlePageClick}
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={20}
       pageCount={props.pageCount}
       previousLabel="Anterior"
       renderOnZeroPageCount={null}

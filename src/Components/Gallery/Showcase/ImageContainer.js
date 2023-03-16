@@ -11,16 +11,16 @@ const ImageContainer = (props) => {
   return (
     <>
       <LazyLoadImage
-        key={props.item.link}
-        onClick={() => props.viewImage('view', props.item.link)}
+        key={props.item.imageLink}
+        onClick={() => props.viewImage('view', props.item.imageLink)}
         className={props.className}
         onMouseEnter={() => showCategory('over')}
         onMouseLeave={() => showCategory('leave')}
-        src={props.item.link}
+        src={props.item.imageLink}
         alt="img"
       />
       {isMouseOver && (
-        <span className="item-category">{props.item.category}</span>
+        <span className="item-category">{props.item.imageCategory}</span>
       )}
     </>
   );

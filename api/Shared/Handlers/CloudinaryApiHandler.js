@@ -29,6 +29,7 @@ const searchImages = async (tagname) => {
 
     const result = await cloudinary.search
       .expression(`resource_type:image AND tags=${tagname}`)
+			.max_results(500)
       .execute();
 
     const images = result.resources.map((resource) => ({
@@ -81,7 +82,7 @@ const transformImages = async (type, ...options) => {
 		}
 
 		// Define properties to be extracted
-		let images, crop, format, width, height;
+		let images, crop, format, width, height, overlayPublicId;
 
 		// Define which properties are set based on type
     switch (type) {
@@ -103,6 +104,24 @@ const transformImages = async (type, ...options) => {
 				[ images, height, width, crop ] = options;				
 				cloudinaryUrlOptions = { height, width, crop }
 				break;
+
+			case 'addWatermark':
+				[ images, width, crop, overlayPublicId ] = options;
+				cloudinaryUrlOptions = {
+					transformation: [
+						{	
+							width, 
+							crop	
+						},
+						{
+							overlay: overlayPublicId,
+							gravity: 'south_east',
+							x: 10,
+							y: 10,
+							opacity: 50
+						}
+					]
+				}
     }
 
 		// Run transformation based on properties in cloudinaryUrlOptions

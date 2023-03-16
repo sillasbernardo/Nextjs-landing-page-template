@@ -1,4 +1,4 @@
-$gap: 32px;
+$gap: 12px;
 $num-cols: 4;
 $row-height: 200px;
 
@@ -61,20 +61,36 @@ $row-height: 200px;
 
 .view-photo-transition-enter {
   transform: scale(0);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 105;
 }
 
 .view-photo-transition-enter-active {
   transform: scale(1);
   transition: transform 500ms ease-in-out;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 105;
 }
 
 .view-photo-transition-exit {
   transform: scale(1);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 105;
 }
 
 .view-photo-transition-exit-active {
   transform: scale(0);
   transition: transform 500ms ease-in-out;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 105;
 }
 
 @media screen and (max-width: 1024px) {

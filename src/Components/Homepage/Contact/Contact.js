@@ -16,7 +16,7 @@ const SocialMediaItem = (props) => {
         src={props.image}
         alt="img"
       />
-      <span className="socialmedia-info">{props.info}</span>
+      <span onClick={() => window.open(props.link)} className="socialmedia-info">{props.info}</span>
     </div>
   );
 };
@@ -25,7 +25,7 @@ const Contact = (props) => {
   const isMobile = useContext(MobileViewContext);
 
   const [apiData, setApiData] = useState();
-  fetchApi('api/contact', setApiData, 'contactData');
+  fetchApi('api/homepage/contact', setApiData, 'contactData');
 
   return (
     <>
@@ -43,8 +43,9 @@ const Contact = (props) => {
                 return (
                   <SocialMediaItem
                     key={index}
-                    image={socialMedia.icon}
-                    info={socialMedia.info}
+                    image={socialMedia.contactIcon}
+                    info={socialMedia.contactInfo.info}
+                    link={socialMedia.contactInfo.link}
                   />
                 );
               })}

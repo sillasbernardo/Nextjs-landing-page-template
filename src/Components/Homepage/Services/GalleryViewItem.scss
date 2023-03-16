@@ -11,7 +11,7 @@
 
 	.gallery-view-transition-enter-active {
 		opacity: 1;
-		transition: opacity 500ms ease-in-out;
+		transition: opacity 300ms ease-in-out;
 	}
 
 	.gallery-view-transition-exit {
@@ -20,7 +20,7 @@
 
 	.gallery-view-transition-exit-active {
 		opacity: 0;
-		transition: opacity 500ms ease-in-out;
+		transition: opacity 300ms ease-in-out;
 	}
 
 	.circle-image {

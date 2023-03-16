@@ -11,12 +11,15 @@
  * loader = Each component that calls fetchApi needs to
  * access a different property in the result data.
  * Eg: "api.data.example or api.data['example']"
+ * 
+ * galleryCategory = It's only used by the gallery to fetch new images
+ * when a category is clicked
  */
 
 import axios from 'axios';
 import { useEffect } from 'react';
 
-export const fetchApi = (path, setData, loader) => {  
+export const fetchApi = (path, setData, loader, galleryCategory) => {  
   useEffect(() => {
     const loadData = async () => {
       const api = await axios.get(process.env.REACT_APP_API_PATH_L + path, {
@@ -27,5 +30,5 @@ export const fetchApi = (path, setData, loader) => {
       setData(api.data[loader]);
     };
     loadData();
-  }, []);
+  }, [galleryCategory]);
 };

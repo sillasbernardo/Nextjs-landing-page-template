@@ -29,8 +29,8 @@ const getContact = async (req, res, next) => {
         // Return contact link only if image filename and object key matches
         if (imageFilename === nameTag){
           contactData.push({
-            partnerLogo: image.link,
-            partnerContactLink: contactLinks[nameTag]
+            contactIcon: image.link,
+            contactInfo: contactLinks[nameTag]
           })       
         }
       })

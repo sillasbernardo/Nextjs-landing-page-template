@@ -43,8 +43,8 @@
       justify-content: center;
       flex-wrap: wrap;
       margin-top: 20px;
-      max-width: 1000px;
-      width: 70%;
+      max-width: 700px;
+      
 
       .partner-item {
         display: inherit;
@@ -52,8 +52,19 @@
         align-items: center;
         margin: 20px 40px;
 
-        img {
-          width: 100px;
+        .partner-item-holder{
+          min-height: 100px;
+          display: flex;
+
+          img {
+            width: 100px;
+            border-radius: 15px;
+          }
+        }
+
+        .partner-item-title{
+          margin-top: 10px;
+          font-weight: bold;
         }
 
         .partner-contact-button {
@@ -70,14 +81,10 @@
             text-decoration: none;
             color: #131313;
           }
-
-          a:hover{
-            color: #fbbc05;
-          }
         }
-
+        
         .partner-contact-button:hover {
-          background-color: #131313;
+          background-color: #ffcf41;
         }
       }
     }
@@ -95,6 +102,7 @@
     .partners-bottom {
       .partners-list {
         min-width: 300px;
+        width: 400px;
         margin: 40px 0;
 
         .partner-item {
