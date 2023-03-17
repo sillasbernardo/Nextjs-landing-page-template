@@ -34,8 +34,6 @@ const Showcase = () => {
   const [apiData, setApiData] = useState();
   fetchApi(`api/gallery/categories/${galleryCategory}`, setApiData, 'imagesData', galleryCategory);
 
-    console.log(apiData)
-
   // Store images
   let items = [];
 

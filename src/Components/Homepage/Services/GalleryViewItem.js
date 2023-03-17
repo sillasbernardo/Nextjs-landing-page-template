@@ -50,7 +50,7 @@ const GalleryViewItem = (props) => {
             )}
           </>
         </CSSTransition>
-        <img src={props.image} alt="img" />
+        <img className="services-image" src={props.image} alt="img" />
       </div>
       <span className="service-title">{props.title}</span>
       {props.isMobile && (

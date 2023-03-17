@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 
 import './Contact.scss';
-import logo from '../../../Assets/Img/logo.png';
 import { MobileViewContext } from '../../Context/MobileViewContext';
 import CloseButton from '../../Utils/CloseButton';
 import { fetchApi } from '../../Utils/fetchApi';
@@ -27,6 +26,9 @@ const Contact = (props) => {
   const [apiData, setApiData] = useState();
   fetchApi('api/homepage/contact', setApiData, 'contactData');
 
+  const [logoData, setLogoData] = useState();
+  fetchApi('api/homepage/logo', setLogoData, 'logoData')
+
   return (
     <>
       {isMobile && <LoadingScreen timeout={1000} styles={{backgroundColor: "#131313"}} spinnerColor="#fff" />}
@@ -36,7 +38,7 @@ const Contact = (props) => {
           Entre em <span className="contact-title-yellow">contato</span>
         </span>
         <div className="contact-left">
-          <img className="contact-left-logo" src={logo} alt="img" />
+          {logoData ? <img className="contact-left-logo" src={logoData[1].link} alt="img" /> : <div></div>}
           <div className="contact-info">
             {apiData &&
               apiData.map((socialMedia, index) => {

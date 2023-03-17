@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -39,10 +40,15 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: "./index.html",
-			filename: "index.html"
+			filename: "index.html",
 		}),
 		new NodePolyfillPlugin(),
-		new Dotenv()
+		new Dotenv(),
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: 'src/assets/favicon.ico', to: 'favicon.ico' }
+			]
+		})
 	],
 	optimization: {
 		minimize: true,

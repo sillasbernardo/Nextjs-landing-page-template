@@ -4,18 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHome } from '@fortawesome/free-solid-svg-icons';
 import { CSSTransition } from 'react-transition-group';
 
-import logo from '../../../Assets/Img/logo.gif';
 import './Header.scss';
 import { MobileViewContext } from '../../Context/MobileViewContext';
 import CloseButton from '../../Utils/CloseButton';
 import NavbarItem from '../../Homepage/Navbar/Navbar_Item';
 import CallToAction from '../../Utils/CallToAction';
 import MobileCategorySection from '../Category/MobileCategorySection';
+import { fetchApi } from '../../Utils/fetchApi';
 
 const Header = () => {
   const isMobile = useContext(MobileViewContext);
 
   const [isMobileNavbar, setIsMobileNavbar] = useState(false);
+
+  const [apiData, setApiData] = useState();
+  fetchApi('api/homepage/logo', setApiData, 'logoData')
 
   if (isMobile) {
     return (
@@ -37,7 +40,9 @@ const Header = () => {
         </CSSTransition>
         <div className="gallery-header-container">
           <div className="gallery-logo">
-            <img src={logo} width="100" alt="img" />
+            {apiData ? <img src={apiData[0].link} width="100" alt="img" /> : <div>
+              
+            </div>}
           </div>
           <div className="gallery-header-bottom">
             {isMobile && (
@@ -58,7 +63,7 @@ const Header = () => {
   } else {
     return (
       <div className="gallery-header-container">
-        <img src={logo} width="100" alt="img" />
+        {apiData ? <img src={apiData[0].link} width="100" alt="img" /> : <div></div>}
         <span className="gallery-header-title">Galeria de fotos</span>
         <div className="gallery-header-navbar">
           <Link className='header-home-link' to={"/"}>

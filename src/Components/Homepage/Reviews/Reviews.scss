@@ -37,15 +37,19 @@
 @media screen and (max-width: 800px) {
 	.reviews-container{
 		flex-direction: column;
-		justify-content: space-evenly;
+		justify-content: space-around;
 		background-color: #FBBC05;
 		display: flex;
 		align-items: center;
 		height: 400px;
 
 		.reviews-title{
-			font-size: 16pt;
+			font-size: 20pt;
 			text-align: center;
+		}
+
+		.reviews-images{
+			margin-bottom: 40px;
 		}
 	}
 }
