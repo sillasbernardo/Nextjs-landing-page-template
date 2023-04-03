@@ -1,0 +1,43 @@
+.image-hover-view{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+
+  .i-h-v-transition-enter{
+    opacity: 0;
+  }
+
+  .i-h-v-transition-enter-active{
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  .i-h-v-transition-exit{
+    opacity: 1;
+  }
+
+  .i-h-v-transition-exit-active{
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  .i-h-v-content{
+    position: absolute;
+    z-index: 2;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    
+    .i-h-v-view-image{
+      position: inherit;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 18pt;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.socialmedia-item{
+	display: flex;
+	align-items: center;
+	margin: 5px 0;
+	cursor: pointer;
+
+	.socialmedia-logo{
+		margin-right: 10px;
+	}
+
+	.socialmedia-info{
+		font-size: 10pt;
+	}
+}

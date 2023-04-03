@@ -1,0 +1,51 @@
+.image-zoom{
+  position: flex;
+  align-items: center;
+  justify-content: center;
+
+  img{
+    max-height: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 3px solid #FBBC05;
+    z-index: 5;
+  }
+
+  button{
+    position: fixed;
+    left: 90%;
+    top: 30px;
+    z-index: 5;
+    background-color: #FBBC05;
+    border-style: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.image-zoom-backdrop{
+  position: fixed;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+}
+
+@media screen and (max-width: 950px){
+  .image-zoom{
+    img{
+      max-width: 80%;
+    }
+
+    button{
+      left: 50%;
+      top: 30px;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

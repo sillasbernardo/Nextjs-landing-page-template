@@ -1,0 +1,47 @@
+.presentation-headline-container{
+	position: absolute;
+	top: 350px;
+	left: 120px;
+	z-index: 9;
+
+	.presentation-headline{
+		color: white;
+
+		h1{
+			font-size: 40pt;
+			width: 350px;
+		}
+
+		h5{
+			width: 350px;
+			font-size: 12pt;
+			font-weight: lighter;
+		}
+
+		span{
+			color: #FBBC05;
+			font-weight: bold;
+		}
+	}
+}
+
+
+
+@media screen and (max-width: 800px) {
+	.presentation-headline-container{
+		left: 50px;
+		top: 400px;
+
+		.presentation-headline{
+			h1{
+				font-size: 28pt;
+				width: 250px;
+			}
+
+			h5{
+				width: 220px;
+				font-size: 13pt;
+			}
+		}
+	}
+}

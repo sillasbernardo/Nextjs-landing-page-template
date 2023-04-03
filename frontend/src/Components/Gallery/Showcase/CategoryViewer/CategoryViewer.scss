@@ -1,0 +1,18 @@
+.category-viewer{
+  position: fixed;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: white;
+  margin-left: 20px;
+  height: 70px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+
+  .category-viewer-text{
+    font-size: 20pt;
+    font-weight: bold;
+    opacity: 0.5;
+  }
+}

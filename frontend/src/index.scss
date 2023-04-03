@@ -1,0 +1,36 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url(./Assets/Fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url(./Assets/Fonts/Roboto-Bold.ttf);
+	font-weight: bolder;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url(./Assets/Fonts/Roboto-Thin.ttf);
+	font-weight: lighter;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url(./Assets/Fonts/Roboto-Light.ttf);
+	font-weight: light;
+}
+
+@font-face {
+	font-family: 'Angelface';
+	src: url(./Assets/Fonts/Angelface.otf);
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto";
+
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+}

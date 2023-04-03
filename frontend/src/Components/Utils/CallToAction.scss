@@ -1,0 +1,61 @@
+.calltoaction-container {
+  background-color: #fbbc05;
+  padding: 1rem;
+  width: fit-content;
+  width: -moz-fit-content;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+
+  .calltoaction-leftside {
+    #calltoaction-title {
+      font-size: 10pt;
+      cursor: default;
+    }
+
+    .calltoaction-number {
+      font-weight: bold;
+      font-size: 11pt;
+      cursor: pointer;
+
+      span {
+        margin-left: 0.5rem;
+        font-size: 11pt;
+      }
+    }
+  }
+
+  .calltoaction-blankline {
+    width: 2px;
+    height: 50px;
+    margin: 0 10px;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+
+  .calltoaction-socialmedia {
+    cursor: pointer;
+    width: 40px;
+  }
+
+  .cta-socialmedia-icons {
+    img{
+      margin: 0 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .calltoaction-container {
+    height: fit-content;
+    padding: 10px 20px;
+
+    .calltoaction-leftside {
+      .calltoaction-number {
+        span {
+          font-size: 10pt;
+        }
+      }
+    }
+  }
+}

@@ -1,77 +1,85 @@
-# Reactjs Website Project
+# React + Express Website
 
-## Overview
+This is a SPA freelancing website model which was primarily designed for a client operating in event planning industry, with a particular focus on providing high-quality lighting services.
 
-This is a freelancing website model which was primarily designed for a client operating in event planning industry, with a particular focus on providing high-quality lighting services.
+Some information in this code was changed to preserve the company's copyright of its content. All images and text are samples.
 
-To create this website, I used several technologies including React, NodeJs and Cloudinary. These technologies were chosen for their ability to provide a fast, responsive user experience, as well as flexibility and scalability. I also incorporated Sass, several React tools and  React Lazy Loading to enhance the functionality and performance of the website.
+In the following sections, I`ll dive deeper into the features and functionalities of the website, and provide instructions on how to use them.
 
-In the following sections, I`ll dive deeper into the features and functionalities of the website, and provide instructions on how to use them. I hope you find this website to be valuable resource for your needs, and any feeback or questions are welcome.
+**See the real website here**: https://gbiluminacoes.com.br
 
-## Gallery
+## Features
 
-## Getting Started
+* The website has two pages: The homepage which is a landing page and a gallery of photos.
+  
+* Images are fetched from Cloudinary using the Cloudinary API and displayed in a responsive grid layout.
+  
+* Users can click on individual images to view a larger version of the image in a modal.
+  
+* The website has an infinite scroll feature that loads more images as the user scrolls down.
 
-### Must know
+* The backend is built with Express.js and handles API requests to Cloudinary to fetch images.
 
-* This website uses **npm** for installing and managing nodejs packages.
-* Latest version of nodejs is recomended.
-* I recommend using **nvm** to install **npm** and the latest version of **nodejs**. Check [here](https://github.com/nvm-sh/nvm).
-* You need **git** installed. Check [here](https://git-scm.com/).
-* You can use any IDE. I used Visual Studio Code ( vscode ).
+## Screenshots
 
-### Installation
+<img src="./screenshots/homepage01.png" width="600" />
+<br/>
+<br/>
+<img src="./screenshots/homepage02.png" width="600" />
+<br/>
+<br/>
+<img src="./screenshots/homepage03.png" width="600" />
+<br/>
+<br/>
+<img src="./screenshots/gallery01.png" width="600" />
+<br/>
+<br/>
+<img src="./screenshots/gallery02.png" width="600" />
+<br/>
+<br/>
 
-```bash
-# Cloning project
-git clone git@github.com:sillasbernardo/Reactjs-landing-page-template.git
+## Technologies
 
-# Enter folder
-cd Reactjs-landing-page-template
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" alt="React" width="50"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg" alt="Express" width="50" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" width="50" alt="sass" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="50" alt="nodejs" />
 
-# Execute start.cmd - Windows based OS
-start.cmd
+## Installation
 
-# Execute start.sh - Debian Linux based OS
-./start.sh
+* Clone the repository to your local machine.
+* Navigate to the project directory in your terminal.
+* Run ``npm install`` to install all required dependencies.
+* Create a .env file in the frontend directory and add the following environment variables:
+
+```env
+REACT_APP_API_PATH=<your Express.js API URL>
+REACT_APP_API_KEY=<A string that the backend will validate as Authorization in Headers>
 ```
 
-The ***start*** script runs:
+* Create another .env file in the backend directory with the following enviroment variables:
 
-```bash
-# For windows based OS
-# --------------------
-
-# Install dependencies if needed
-npm install
-# Open another instance of cmd, enter /api folder and start npm server
-start cmd /k "cd api && npm start"
-# Start npm server on current folder
-npm start
-
-# For Debian linux based OS
-#--------------------------
-
-# Install dependencies if needed
-npm install
-# Open another instance of terminal, enter /api folder and start npm server
-gnome-terminal --working-directory="./api" -- npm start
-# Start npm server on current folder
-npm start
+```env
+CLOUDINARY_API_KEY=<your Cloudinary API key>
+CLOUDINARY_API_SECRET=<your Cloudinary API secret>
+CLOUDINARY_CLOUD_NAME=<your Cloudinary cloud name>
 ```
 
-## Developer Documentation
+* Run ``npm start`` in frontend directory or ``npm run dev`` in backend directory to start the development server.
 
-### [Frontend](documentation/frontend/frontend.md)
+## Usage
 
+* Navigate to localhost:8080 in your web browser.
+* Browse the homepage and click in "View gallery" in services section to browse and interact with the image gallery.
+* Scroll down to load more images.
+* Change category in the left sidebar.
 
+## License
 
-4.	Backend Documentation: This section should include documentation on the backend of the website, including the Nodejs server, its API endpoints, and how they are structured. It should also include information on the database schema and how it is organized.
+This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-5.	Deployment: This section should include instructions on how to deploy the website to a production environment, including any configuration settings that need to be set up.
+## Acknowledgments
 
-6.	Testing: This section should include information on how to test the website, including any automated testing frameworks used, and how to run tests locally and on a production environment.
-
-7.	Troubleshooting: This section should include common issues that users may encounter when using the website, along with steps to resolve them.
-
-8.	Conclusion: Summarize the key points of the documentation and provide any additional resources or information that users may find useful.
+* Cloudinary for providing the API that allows this website to fetch images.
+* React Lazy Load Image Component for the lazy loading functionality used in the image gallery.
+* React Infinite Scroll Component for the infinite scroll functionality used in the image gallery.

@@ -1,8 +1,0 @@
-node_modules
-dist
-notes.txt
-.env
-privatekey.json
-functions
-# Local Netlify folder
-.netlify
